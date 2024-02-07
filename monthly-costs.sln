@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1955304-06DB-4D97-A6D7-BDC607795D70}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Presentation", "01 - Presentation", "{01E07409-EB83-4380-AA4E-B7DFEC510183}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Application", "02 - Application", "{8F5618A2-BEE2-46B9-AED3-BA5B0F7B79B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Domain", "03 - Domain", "{0D9109A4-4419-4D0B-95AE-ADDFA0588CB6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - Infrastructure", "04 - Infrastructure", "{5862AAA5-0FF3-42EB-946B-81099FEF616F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.API", "src\01 - Presentation\MonthlyCosts.API\MonthlyCosts.API.csproj", "{585A54CF-95FB-4FFE-A232-8CCC025C4AB9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCost.Application", "src\02 - Application\MonthlyCost.Application\MonthlyCost.Application.csproj", "{DB7CEFBB-AB32-4164-8FD7-7AFC93030EE1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Domain", "src\03 - Domain\MonthlyCosts.Domain\MonthlyCosts.Domain.csproj", "{15E7B497-4DB6-4DF1-9147-6E85C62B2CDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyCosts.Domain.Core", "src\03 - Domain\MonthlyCosts.Domain.Core\MonthlyCosts.Domain.Core.csproj", "{81EB99D9-604F-4504-BDC7-1EAAE96C3FD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyCosts.Domain.Services", "src\03 - Domain\MonthlyCosts.Domain.Services\MonthlyCosts.Domain.Services.csproj", "{D3E485D9-317C-4D7D-B73D-170884706C39}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Data.NoSql", "src\04 - Infrastructure\MonthlyCosts.Data.NoSql\MonthlyCosts.Data.NoSql.csproj", "{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}"
+EndProject
+
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{585A54CF-95FB-4FFE-A232-8CCC025C4AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{585A54CF-95FB-4FFE-A232-8CCC025C4AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{585A54CF-95FB-4FFE-A232-8CCC025C4AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{585A54CF-95FB-4FFE-A232-8CCC025C4AB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E7B497-4DB6-4DF1-9147-6E85C62B2CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E7B497-4DB6-4DF1-9147-6E85C62B2CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E7B497-4DB6-4DF1-9147-6E85C62B2CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E7B497-4DB6-4DF1-9147-6E85C62B2CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB7CEFBB-AB32-4164-8FD7-7AFC93030EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB7CEFBB-AB32-4164-8FD7-7AFC93030EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB7CEFBB-AB32-4164-8FD7-7AFC93030EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB7CEFBB-AB32-4164-8FD7-7AFC93030EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81EB99D9-604F-4504-BDC7-1EAAE96C3FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81EB99D9-604F-4504-BDC7-1EAAE96C3FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81EB99D9-604F-4504-BDC7-1EAAE96C3FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81EB99D9-604F-4504-BDC7-1EAAE96C3FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E485D9-317C-4D7D-B73D-170884706C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E485D9-317C-4D7D-B73D-170884706C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E485D9-317C-4D7D-B73D-170884706C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E485D9-317C-4D7D-B73D-170884706C39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{585A54CF-95FB-4FFE-A232-8CCC025C4AB9} = {01E07409-EB83-4380-AA4E-B7DFEC510183}
+		{15E7B497-4DB6-4DF1-9147-6E85C62B2CDB} = {0D9109A4-4419-4D0B-95AE-ADDFA0588CB6}
+		{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A} = {5862AAA5-0FF3-42EB-946B-81099FEF616F}
+		{DB7CEFBB-AB32-4164-8FD7-7AFC93030EE1} = {8F5618A2-BEE2-46B9-AED3-BA5B0F7B79B7}
+		{81EB99D9-604F-4504-BDC7-1EAAE96C3FD3} = {0D9109A4-4419-4D0B-95AE-ADDFA0588CB6}
+		{D3E485D9-317C-4D7D-B73D-170884706C39} = {0D9109A4-4419-4D0B-95AE-ADDFA0588CB6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2439EC12-48DA-411D-AC2A-8419F444F3F0}
+	EndGlobalSection
+EndGlobal
