@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  mongo-db:
+    image: mongo
+  sql-server-db:
+    image: mcr.microsoft.com/mssql/server
+  monthlycosts-api:
+    image: ${DOCKER_REGISTRY-}monthlycostsapi
+    build:
+      context: .
+      dockerfile: src/01 - Presentation/MonthlyCosts.API/Dockerfile
+

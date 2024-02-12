@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  mongo-db:
+    container_name: mongo-db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/site:/data/db
+
+  sql-server-db:
+    container_name: sql-server-db
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Odb12345678"
+      ACCEPT_EULA: "Y"
+
+  monthlycosts-api:
+    container_name: monthlycosts-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:OrderConnection=Server=sourcingsqldb;Database=OrderDb;User Id=sa;Password=Odb12345678"
+    depends_on:
+      - mongo-db
+      - sql-server-db
+    volumes:
+      - ${HOME}/.aspnet/https:/root/.aspnet/https/
+    ports:
+      - "8002:80"
