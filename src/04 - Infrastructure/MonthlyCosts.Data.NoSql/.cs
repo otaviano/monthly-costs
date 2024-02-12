@@ -4,7 +4,7 @@ using MonthlyCosts.Domain.Interfaces;
 using Stocks.Billing.Infra.Data.NoSql.Context;
 using System.Linq.Dynamic.Core;
 
-namespace MonthlyCosts.Data.NoSql;
+namespace MonthlyCosts.Infra.Data.NoSql;
 
 public class CostMongoDbRepository : ICostNoSqlRepository
 {

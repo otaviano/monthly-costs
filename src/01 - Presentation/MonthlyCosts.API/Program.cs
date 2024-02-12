@@ -1,25 +1,27 @@
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using MonthlyCosts.Infra.IoC;
+
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSettings(configuration);
+builder.Services.AddSwagger(configuration);
+builder.Services.AddMessageBrokerInMemmory();
+builder.Services.AddHealthChecks(configuration);
+builder.Services.AddNoSqlConnection();
+builder.Services.AddRepositories();
+builder.Services.AddApiVersion();
 
 var app = builder.Build();
+var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.ConfigureSwagger(configuration, provider);
+app.ConfigureHealthCheckEndpoints(configuration);
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

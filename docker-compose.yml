@@ -1,6 +1,15 @@
 version: '3.4'
 
 services:
+  https-portal:
+    image: steveltn/https-portal:1
+    links:
+      - monthlycosts-api
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      DOMAINS: 'monthly-costs.com'
   mongo-db:
     image: mongo
   sql-server-db:

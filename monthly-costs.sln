@@ -27,9 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Domain.Core", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Domain.Services", "src\03 - Domain\MonthlyCosts.Domain.Services\MonthlyCosts.Domain.Services.csproj", "{D3E485D9-317C-4D7D-B73D-170884706C39}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Data.NoSql", "src\04 - Infrastructure\MonthlyCosts.Data.NoSql\MonthlyCosts.Data.NoSql.csproj", "{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Infra.Data.NoSql", "src\04 - Infrastructure\MonthlyCosts.Data.NoSql\MonthlyCosts.Infra.Data.NoSql.csproj", "{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A957BAED-1243-4522-BBF8-ABC64DBEE32D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Infra.IoC", "src\04 - Infrastructure\MonthlyCosts.Infra.IoC\MonthlyCosts.Infra.IoC.csproj", "{5119AEE5-B179-4DFD-8612-C1B95EC9B47D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Infra.Bus", "src\04 - Infrastructure\MonthlyCosts.Infra.Bus\MonthlyCosts.Infra.Bus.csproj", "{CBE11EFA-014C-41F5-8AF6-D5B20A4C49F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +69,14 @@ Global
 		{A957BAED-1243-4522-BBF8-ABC64DBEE32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A957BAED-1243-4522-BBF8-ABC64DBEE32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A957BAED-1243-4522-BBF8-ABC64DBEE32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5119AEE5-B179-4DFD-8612-C1B95EC9B47D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5119AEE5-B179-4DFD-8612-C1B95EC9B47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5119AEE5-B179-4DFD-8612-C1B95EC9B47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5119AEE5-B179-4DFD-8612-C1B95EC9B47D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE11EFA-014C-41F5-8AF6-D5B20A4C49F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE11EFA-014C-41F5-8AF6-D5B20A4C49F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE11EFA-014C-41F5-8AF6-D5B20A4C49F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE11EFA-014C-41F5-8AF6-D5B20A4C49F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +88,8 @@ Global
 		{81EB99D9-604F-4504-BDC7-1EAAE96C3FD3} = {0D9109A4-4419-4D0B-95AE-ADDFA0588CB6}
 		{D3E485D9-317C-4D7D-B73D-170884706C39} = {0D9109A4-4419-4D0B-95AE-ADDFA0588CB6}
 		{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A} = {5862AAA5-0FF3-42EB-946B-81099FEF616F}
+		{5119AEE5-B179-4DFD-8612-C1B95EC9B47D} = {5862AAA5-0FF3-42EB-946B-81099FEF616F}
+		{CBE11EFA-014C-41F5-8AF6-D5B20A4C49F3} = {5862AAA5-0FF3-42EB-946B-81099FEF616F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2439EC12-48DA-411D-AC2A-8419F444F3F0}
