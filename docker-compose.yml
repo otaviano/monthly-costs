@@ -10,6 +10,7 @@ services:
       - '443:443'
     environment:
       DOMAINS: 'monthly-costs.com'
+      STAGE: local
   mongo-db:
     image: mongo
   sql-server-db:

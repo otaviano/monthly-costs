@@ -21,7 +21,7 @@ services:
     container_name: monthlycosts-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:OrderConnection=Server=sourcingsqldb;Database=OrderDb;User Id=sa;Password=Odb12345678"
+      - "ConnectionStrings:DbConnection=Server=sql-server-db;Database=monthly-costs;User Id=sa;Password=Odb12345678;Encrypt=False"
     depends_on:
       - mongo-db
       - sql-server-db

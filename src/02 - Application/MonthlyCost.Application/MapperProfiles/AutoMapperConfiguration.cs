@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using MonthlyCost.Application.MapperProfiles;
 
-namespace MonthlyCosts.Infra.IoC;
+namespace MonthlyCost.Application.MapperProfiles;
 
 public static class AutoMapperConfiguration
 {
@@ -10,6 +9,7 @@ public static class AutoMapperConfiguration
         return new MapperConfiguration(p =>
         {
             p.AddProfile(new DomainToViewModelProfile());
+            p.AddProfile(new DomainToCommandProfile());
             p.AddProfile(new ViewModelToCommandProfile());
         });
     }

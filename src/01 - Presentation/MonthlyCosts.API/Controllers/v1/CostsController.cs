@@ -37,12 +37,13 @@ namespace MonthlyCosts.API.Controllers.v1
         {
             var id = await _application.Create(cost);
 
-            return Accepted(new { Id = 0 });
+            return Accepted(new { Id = id });
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] CostViewModel cost)
         {
+            cost.Id = id;
             await _application.Update(cost);
 
             return Accepted(cost);
