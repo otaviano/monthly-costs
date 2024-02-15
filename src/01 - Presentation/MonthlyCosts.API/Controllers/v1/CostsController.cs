@@ -53,7 +53,7 @@ namespace MonthlyCosts.API.Controllers.v1
         {
             await _application.Delete(id);
 
-            return Accepted(id);
+            return Accepted(new { Id = id });
         }
     }
 }

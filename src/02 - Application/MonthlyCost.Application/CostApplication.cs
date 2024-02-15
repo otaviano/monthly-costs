@@ -3,6 +3,7 @@ using MonthlyCost.Application.Interfaces;
 using MonthlyCost.Application.ViewModels.v1;
 using MonthlyCosts.Domain.Commands;
 using MonthlyCosts.Domain.Core.Bus;
+using MonthlyCosts.Domain.Entities;
 using MonthlyCosts.Domain.Interfaces;
 
 namespace MonthlyCost.Application;
@@ -22,18 +23,17 @@ public class CostApplication : ICostApplication
 
     public IEnumerable<CostResponseViewModel> Get()
     {
-        var costs = _queryRepository.GetAll();
+        var costs = _queryRepository.GetAll()
+            ?? Enumerable.Empty<Cost>();
 
-        return _autoMapper.Map<IEnumerable<CostResponseViewModel>>(costs)
-            ?? throw new NullReferenceException($"Error mapping to #{nameof(CostResponseViewModel)}");
+        return _autoMapper.Map<IEnumerable<CostResponseViewModel>>(costs);
     }
 
     public async Task<CostResponseViewModel> GetAsync(Guid id)
     {
         var cost = await _queryRepository.GetAsync(id);
 
-        return _autoMapper.Map<CostResponseViewModel>(cost)
-            ?? throw new NullReferenceException($"Error mapping to #{nameof(CostResponseViewModel)}");
+        return _autoMapper.Map<CostResponseViewModel>(cost);
     }
 
     public async Task<Guid> Create(CostRequestViewModel model)
