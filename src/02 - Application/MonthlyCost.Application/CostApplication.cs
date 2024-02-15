@@ -20,23 +20,23 @@ public class CostApplication : ICostApplication
         _queryRepository = queryRepository;
     }
 
-    public IEnumerable<CostViewModel> Get()
+    public IEnumerable<CostResponseViewModel> Get()
     {
         var costs = _queryRepository.GetAll();
 
-        return _autoMapper.Map<IEnumerable<CostViewModel>>(costs)
-            ?? throw new NullReferenceException($"Error mapping to #{nameof(CostViewModel)}");
+        return _autoMapper.Map<IEnumerable<CostResponseViewModel>>(costs)
+            ?? throw new NullReferenceException($"Error mapping to #{nameof(CostResponseViewModel)}");
     }
 
-    public CostViewModel Get(Guid id)
+    public async Task<CostResponseViewModel> GetAsync(Guid id)
     {
-        var cost = _queryRepository.Get(id);
+        var cost = await _queryRepository.GetAsync(id);
 
-        return _autoMapper.Map<CostViewModel>(cost)
-            ?? throw new NullReferenceException($"Error mapping to #{nameof(CostViewModel)}");
+        return _autoMapper.Map<CostResponseViewModel>(cost)
+            ?? throw new NullReferenceException($"Error mapping to #{nameof(CostResponseViewModel)}");
     }
 
-    public async Task<Guid> Create(CostViewModel model)
+    public async Task<Guid> Create(CostRequestViewModel model)
     {
         var command = _autoMapper.Map<CreateCostCommand>(model)
             ?? throw new NullReferenceException($"Error mapping to #{nameof(CreateCostCommand)}");
@@ -45,10 +45,11 @@ public class CostApplication : ICostApplication
         return command.Id;
     }
 
-    public async Task Update(CostViewModel model)
+    public async Task Update(Guid id, CostRequestViewModel model)
     {
         var command = _autoMapper.Map<UpdateCostCommand>(model)
-         ?? throw new NullReferenceException($"Error mapping to #{nameof(UpdateCostCommand)}");
+            ?? throw new NullReferenceException($"Error mapping to #{nameof(UpdateCostCommand)}");
+        command.Id = id;
 
         await _bus.SendCommand(command);
     }

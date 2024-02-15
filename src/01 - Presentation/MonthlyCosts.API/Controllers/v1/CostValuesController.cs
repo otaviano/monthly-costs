@@ -27,14 +27,14 @@ namespace MonthlyCosts.API.Controllers.v1
         [HttpGet("{id}")]
         public ActionResult<CostValueViewModel> Get(Guid id)
         {
-            var result = _application.Get(id);
+            var result = _application.GetAsync(id);
             if (result is null) return NotFound();
 
             return Ok();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CostViewModel cost)
+        public async Task<IActionResult> Post([FromBody] CostRequestViewModel cost)
         {
             var id = await _application.Create(cost);
 

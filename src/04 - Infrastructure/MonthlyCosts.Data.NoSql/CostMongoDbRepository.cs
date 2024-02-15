@@ -1,10 +1,10 @@
 ﻿using MongoDB.Driver;
 using MonthlyCosts.Domain.Entities;
 using MonthlyCosts.Domain.Interfaces;
-using Stocks.Billing.Infra.Data.NoSql.Context;
+using Stocks.Billing.Infra.Data.MongoDb.Context;
 using System.Linq.Dynamic.Core;
 
-namespace MonthlyCosts.Infra.Data.NoSql;
+namespace MonthlyCosts.Infra.Data.MongoDb;
 
 public class CostMongoDbRepository : ICostNoSqlRepository
 {
@@ -14,15 +14,16 @@ public class CostMongoDbRepository : ICostNoSqlRepository
     {
         this.dbContext = dbContext;
     }
+
     public IEnumerable<Cost> GetAll()
     {
         return dbContext.Collection.AsQueryable();
     }
-    public Cost Get(Guid id)
+    public async Task<Cost> GetAsync(Guid id)
     {
-        return dbContext.Collection.AsQueryable()
-            .Where(p => p.Id == id)
-            .FirstOrDefault(new Cost());
+        return await dbContext.Collection
+            .Find(a => a.Id == id)
+            .FirstOrDefaultAsync();
     }
     public PagedResult<Cost> Search(string name, int pageNumber, int pageSize)
     {
@@ -45,10 +46,7 @@ public class CostMongoDbRepository : ICostNoSqlRepository
     }
     public async Task Update(Cost cost)
     {
-        var update = Builders<Cost>.Update
-            .Set(p => p, cost);
-
-        await dbContext.Collection.UpdateOneAsync(p => p.Id == cost.Id, update);
+        await dbContext.Collection.ReplaceOneAsync(filter: g => g.Id == cost.Id, replacement: cost);
     }
     public async Task Delete(Guid id)
     {

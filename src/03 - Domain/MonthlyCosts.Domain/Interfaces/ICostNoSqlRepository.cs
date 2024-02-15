@@ -7,7 +7,7 @@ namespace MonthlyCosts.Domain.Interfaces
     {
         Task Create(Cost cost);
         Task Delete(Guid id);
-        Cost Get(Guid id);
+        Task<Cost> GetAsync(Guid id);
         IEnumerable<Cost> GetAll();
         Task Update(Cost cost);
         PagedResult<Cost> Search(string name, int pageNumber, int pageSize);

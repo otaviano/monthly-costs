@@ -8,7 +8,8 @@ public class DomainToViewModelProfile : Profile
 {
     public DomainToViewModelProfile()
     {
-        CreateMap<Cost, CostViewModel>();
+        CreateMap<Cost, CostRequestViewModel>();
+        CreateMap<Cost, CostResponseViewModel>();
         CreateMap<CostValue, CostValueViewModel>();
     }
 }

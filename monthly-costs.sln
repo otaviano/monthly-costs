@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Domain.Core", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Domain.Services", "src\03 - Domain\MonthlyCosts.Domain.Services\MonthlyCosts.Domain.Services.csproj", "{D3E485D9-317C-4D7D-B73D-170884706C39}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Infra.Data.NoSql", "src\04 - Infrastructure\MonthlyCosts.Data.NoSql\MonthlyCosts.Infra.Data.NoSql.csproj", "{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Infra.Data.MongoDb", "src\04 - Infrastructure\MonthlyCosts.Data.NoSql\MonthlyCosts.Infra.Data.MongoDb.csproj", "{F53F44FD-261C-41D0-A7FF-3EE412DA8E5A}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A957BAED-1243-4522-BBF8-ABC64DBEE32D}"
 EndProject

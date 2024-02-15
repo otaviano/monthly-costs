@@ -11,10 +11,10 @@ public class UpdateCostCommand : Command
     public decimal Avarage { get; set; }
     public decimal Value { get; set; }
     public DateOnly Month { get; set; }
-    public short PaymentMethod { get; set; }
+    public PaymentMethod PaymentMethod { get; set; }
 
     public override ValidationResult Validate()
     {
-        throw new NotImplementedException();
+        return base.ValidationResult;
     }
 }

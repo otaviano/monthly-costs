@@ -9,5 +9,7 @@ public class DomainToCommandProfile : Profile
     public DomainToCommandProfile()
     {
         CreateMap<CreateCostCommand, Cost>();
+        CreateMap<UpdateCostCommand, Cost>();
+        CreateMap<DeleteCostCommand, Cost>();
     }
 }

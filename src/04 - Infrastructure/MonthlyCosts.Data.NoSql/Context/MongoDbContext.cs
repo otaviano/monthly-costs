@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using MonthlyCosts.Domain.Settings;
 
-namespace Stocks.Billing.Infra.Data.NoSql.Context
+namespace Stocks.Billing.Infra.Data.MongoDb.Context
 {
     public class MongoDbContext<T>
     {

@@ -9,6 +9,6 @@ public class DeleteCostCommand : Command
    
     public override ValidationResult Validate()
     {
-        throw new NotImplementedException();
+        return base.ValidationResult;
     }
 }

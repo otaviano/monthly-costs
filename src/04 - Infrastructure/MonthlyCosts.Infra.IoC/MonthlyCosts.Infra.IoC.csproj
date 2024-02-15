@@ -24,7 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\02 - Application\MonthlyCost.Application\MonthlyCost.Application.csproj" />
     <ProjectReference Include="..\..\03 - Domain\MonthlyCosts.Domain.Services\MonthlyCosts.Domain.Services.csproj" />
-    <ProjectReference Include="..\..\04 - Infrastructure\MonthlyCosts.Data.NoSql\MonthlyCosts.Infra.Data.NoSql.csproj" />
+    <ProjectReference Include="..\MonthlyCosts.Data.NoSql\MonthlyCosts.Infra.Data.MongoDb.csproj" />
     <ProjectReference Include="..\..\04 - Infrastructure\MonthlyCosts.Infra.Bus\MonthlyCosts.Infra.Bus.csproj" />
   </ItemGroup>
 
