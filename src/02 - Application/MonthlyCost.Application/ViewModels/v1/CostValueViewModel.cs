@@ -1,6 +1,5 @@
-﻿namespace MonthlyCost.Application.ViewModels.v1
+﻿namespace MonthlyCost.Application.ViewModels.v1;
+
+public class CostValueViewModel
 {
-    public class CostValueViewModel
-    {
-    }
 }

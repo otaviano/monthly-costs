@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Humanizer;
 using MonthlyCost.Application.ViewModels.v1;
 using MonthlyCosts.Domain.Entities;
 
@@ -9,7 +10,9 @@ public class DomainToViewModelProfile : Profile
     public DomainToViewModelProfile()
     {
         CreateMap<Cost, CostRequestViewModel>();
-        CreateMap<Cost, CostResponseViewModel>();
+        CreateMap<Cost, CostResponseViewModel>()
+            .ForMember(p => p.PaymentMethod, q => q.MapFrom(p => p.PaymentMethod.Humanize()));
+
         CreateMap<CostValue, CostValueViewModel>();
     }
 }

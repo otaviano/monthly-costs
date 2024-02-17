@@ -8,6 +8,7 @@ public static class AutoMapperSetupExtension
 {
     public static void AddAutoMapper(this IServiceCollection services)
     {
+        services.AddTransient<PaymentMethodResolver>();
         services.AddAutoMapper(typeof(AutoMapperConfiguration));
         AutoMapperConfiguration.RegisterMappings();
     }
