@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using MonthlyCosts.Infra.IoC;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -13,6 +12,7 @@ builder.Services.AddHealthChecks(configuration);
 builder.Services.AddApiVersion();
 builder.Services.AddSettings(configuration);
 builder.Services.AddAutoMapper();
+builder.Services.AddHttpConfiguration();
 builder.Services.AddDomain();
 builder.Services.AddApplication();
 builder.Services.AddRepositories();

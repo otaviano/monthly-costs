@@ -6,6 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using MonthlyCosts.Domain.Settings;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Azure;
+using Microsoft.AspNetCore.Components;
+using System.Reflection.Metadata;
 
 namespace MonthlyCosts.Infra.IoC;
 
@@ -50,7 +54,8 @@ public static class SwaggerSetupExtensions
                         Description = settings.Description
                    });
             }
-
+            p.SchemaFilter<PaymentMethodFilter>();
+            p.UseInlineDefinitionsForEnums();
             p.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
         });
     }
