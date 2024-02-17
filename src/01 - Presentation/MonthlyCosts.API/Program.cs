@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using MonthlyCosts.API.Filters;
 using MonthlyCosts.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,7 @@ builder.Services.AddHealthChecks(configuration);
 builder.Services.AddApiVersion();
 builder.Services.AddSettings(configuration);
 builder.Services.AddAutoMapper();
-builder.Services.AddHttpConfiguration();
+builder.Services.AddHttpConfiguration(typeof(HttpGlobalExceptionFilter));
 builder.Services.AddDomain();
 builder.Services.AddApplication();
 builder.Services.AddRepositories();

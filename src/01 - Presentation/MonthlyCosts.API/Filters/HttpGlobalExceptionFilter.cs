@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MonthlyCosts.Domain.Core.Exceptions;
@@ -25,6 +27,12 @@ public class HttpGlobalExceptionFilter : IExceptionFilter
             exception = exception.InnerException;
         }
 
+        if (exception is AutoMapperMappingException 
+            && exception.InnerException is NoMatchFoundException)
+        {
+            exception = exception.InnerException;
+        }
+
         _logger?.LogError(exception, exception.Message);
 
         int statusCode = StatusCodes.Status500InternalServerError;
@@ -32,6 +40,10 @@ public class HttpGlobalExceptionFilter : IExceptionFilter
 
         switch (exception)
         {
+            case NoMatchFoundException noMatchFoundException:
+                message = noMatchFoundException.Message;
+                statusCode = StatusCodes.Status422UnprocessableEntity;
+                break;
             case InvalidCommandException invalidCommandException:
                 message = invalidCommandException.Message;
                 statusCode = StatusCodes.Status422UnprocessableEntity;
@@ -54,7 +66,7 @@ public class HttpGlobalExceptionFilter : IExceptionFilter
         if (_env.IsDevelopment() 
             && exception is not ValidationException)
         {
-            json.Errors[0].Message = context.Exception.ToString();
+            json.Errors[0].Message = exception.ToString();
         }
 
         context.Result = new ObjectResult(json) { StatusCode = statusCode };
