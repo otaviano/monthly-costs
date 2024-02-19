@@ -16,7 +16,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: 03-app-dotnet
+        working-directory: src
 
     steps:
     - uses: actions/checkout@v3
