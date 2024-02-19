@@ -14,7 +14,7 @@ public class CostCommandHandler : CommandHandler,
 {
     protected readonly IMapper _mapper;
     //protected readonly ICostRepository costRepository;
-    protected readonly ICostNoSqlRepository _costNoSqlRepository;
+    public readonly ICostNoSqlRepository _costNoSqlRepository;
 
     public CostCommandHandler(
         IMapper mapper,
