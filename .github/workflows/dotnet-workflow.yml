@@ -16,7 +16,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: src\01 - Presentation\MonthlyCosts.API
+        working-directory: src/01 - Presentation/MonthlyCosts.API
 
     steps:
     - uses: actions/checkout@v3
