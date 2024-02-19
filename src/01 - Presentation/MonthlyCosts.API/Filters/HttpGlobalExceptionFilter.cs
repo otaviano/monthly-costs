@@ -21,17 +21,7 @@ public class HttpGlobalExceptionFilter : IExceptionFilter
 
     public void OnException(ExceptionContext context)
     {
-        var exception = context.Exception;
-        if (exception.GetType() == typeof(AggregateException) && exception.InnerException != null)
-        {
-            exception = exception.InnerException;
-        }
-
-        if (exception is AutoMapperMappingException 
-            && exception.InnerException is NoMatchFoundException)
-        {
-            exception = exception.InnerException;
-        }
+        var exception = GetCurrentException(context);
 
         _logger?.LogError(exception, exception.Message);
 
@@ -63,7 +53,7 @@ public class HttpGlobalExceptionFilter : IExceptionFilter
 
         var json = GetJsonErrorResponse(exception, message, statusCode);
 
-        if (_env.IsDevelopment() 
+        if (_env.IsDevelopment()
             && exception is not ValidationException)
         {
             json.Errors[0].Message = exception.ToString();
@@ -72,6 +62,24 @@ public class HttpGlobalExceptionFilter : IExceptionFilter
         context.Result = new ObjectResult(json) { StatusCode = statusCode };
         context.HttpContext.Response.StatusCode = statusCode;
         context.ExceptionHandled = true;
+    }
+
+    private static Exception GetCurrentException(ExceptionContext context)
+    {
+        var exception = context.Exception;
+
+        if (exception is AggregateException && exception.InnerException != null)
+        {
+            exception = exception.InnerException;
+        }
+
+        if (exception is AutoMapperMappingException
+            && exception.InnerException is NoMatchFoundException)
+        {
+            exception = exception.InnerException;
+        }
+
+        return exception;
     }
 
     public JsonErrorResponse GetJsonErrorResponse(Exception exception, string message, int statusCode)

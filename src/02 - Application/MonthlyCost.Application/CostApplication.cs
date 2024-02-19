@@ -5,14 +5,15 @@ using MonthlyCosts.Domain.Commands;
 using MonthlyCosts.Domain.Core.Bus;
 using MonthlyCosts.Domain.Entities;
 using MonthlyCosts.Domain.Interfaces;
+using System.Reflection;
 
 namespace MonthlyCost.Application;
 
 public class CostApplication : ICostApplication
 {
     private readonly IMapper _autoMapper;
-    private readonly IMediatorHandler _bus;
-    private readonly ICostNoSqlRepository _queryRepository;
+    public readonly IMediatorHandler _bus;
+    public readonly ICostNoSqlRepository _queryRepository;
 
     public CostApplication(IMapper autoMapper, IMediatorHandler bus, ICostNoSqlRepository queryRepository)
     {
@@ -36,27 +37,29 @@ public class CostApplication : ICostApplication
         return _autoMapper.Map<CostResponseViewModel>(cost);
     }
 
-    public async Task<Guid> Create(CostRequestViewModel model)
+    public async Task<Guid> CreateAsync(CostRequestViewModel model)
     {
         var command = _autoMapper.Map<CreateCostCommand>(model)
-            ?? throw new NullReferenceException($"Error mapping to #{nameof(CreateCostCommand)}");
+            ?? throw new ArgumentNullException(nameof(model), $"Error mapping to #{nameof(CreateCostCommand)}");
 
         await _bus.SendCommand(command);
         return command.Id;
     }
 
-    public async Task Update(Guid id, CostRequestViewModel model)
+    public async Task UpdateAsync(Guid id, CostRequestViewModel model)
     {
         var command = _autoMapper.Map<UpdateCostCommand>(model)
-            ?? throw new NullReferenceException($"Error mapping to #{nameof(UpdateCostCommand)}");
+            ?? throw new ArgumentNullException(nameof(model), $"Error mapping to #{nameof(UpdateCostCommand)}");
         command.Id = id;
 
         await _bus.SendCommand(command);
     }
 
-    public async Task Delete(Guid id)
+    public async Task DeleteAsync(Guid id)
     {
-        // TODO : Factory
+        if(id.Equals(Guid.Empty))
+            throw new ArgumentNullException(nameof(id), $"Error mapping to #{nameof(DeleteCostCommand)}");
+
         var command = new DeleteCostCommand { Id = id };
 
         await _bus.SendCommand(command);

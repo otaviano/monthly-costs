@@ -4,9 +4,9 @@ namespace MonthlyCost.Application.Interfaces
 {
     public interface ICostApplication
     {
-        Task<Guid> Create(CostRequestViewModel model);
-        Task Update(Guid id, CostRequestViewModel model);
-        Task Delete(Guid id);
+        Task<Guid> CreateAsync(CostRequestViewModel model);
+        Task UpdateAsync(Guid id, CostRequestViewModel model);
+        Task DeleteAsync(Guid id);
         IEnumerable<CostResponseViewModel> Get();
         Task<CostResponseViewModel> GetAsync(Guid id);
     }

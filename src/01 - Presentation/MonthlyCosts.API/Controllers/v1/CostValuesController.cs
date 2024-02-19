@@ -36,7 +36,7 @@ namespace MonthlyCosts.API.Controllers.v1
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CostRequestViewModel cost)
         {
-            var id = await _application.Create(cost);
+            var id = await _application.CreateAsync(cost);
 
             return Accepted(new { Id = id });
         }
@@ -52,7 +52,7 @@ namespace MonthlyCosts.API.Controllers.v1
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _application.Delete(id);
+            await _application.DeleteAsync(id);
 
             return Accepted();
         }

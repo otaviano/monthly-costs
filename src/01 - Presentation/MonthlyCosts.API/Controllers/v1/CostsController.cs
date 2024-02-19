@@ -48,7 +48,7 @@ namespace MonthlyCosts.API.Controllers.v1
 
         public async Task<IActionResult> PostAsync([FromBody] CostRequestViewModel cost)
         {
-            var id = await _application.Create(cost);
+            var id = await _application.CreateAsync(cost);
 
             return Accepted(new { Id = id });
         }
@@ -61,7 +61,7 @@ namespace MonthlyCosts.API.Controllers.v1
 
         public async Task<IActionResult> PutAsync([FromRoute] Guid id, [FromBody] CostRequestViewModel cost)
         {
-            await _application.Update(id, cost);
+            await _application.UpdateAsync(id, cost);
 
             return Accepted(cost);
         }
@@ -73,7 +73,7 @@ namespace MonthlyCosts.API.Controllers.v1
         [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
         {
-            await _application.Delete(id);
+            await _application.DeleteAsync(id);
 
             return Accepted(new { Id = id });
         }
