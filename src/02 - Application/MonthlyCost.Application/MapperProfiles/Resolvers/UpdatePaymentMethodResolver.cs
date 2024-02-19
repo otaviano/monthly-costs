@@ -6,9 +6,9 @@ using MonthlyCosts.Domain.Entities;
 
 namespace MonthlyCost.Application.MapperProfiles;
 
-public class PaymentMethodResolver : IValueResolver<CostRequestViewModel, CreateCostCommand, PaymentMethod>
+public class UpdatePaymentMethodResolver : IValueResolver<CostRequestViewModel, UpdateCostCommand, PaymentMethod>
 {
-    public PaymentMethod Resolve(CostRequestViewModel source, CreateCostCommand destination, PaymentMethod destMember, ResolutionContext context)
+    public PaymentMethod Resolve(CostRequestViewModel source, UpdateCostCommand destination, PaymentMethod destMember, ResolutionContext context)
     {
         return source.PaymentMethod.DehumanizeTo<PaymentMethod>();
     }
