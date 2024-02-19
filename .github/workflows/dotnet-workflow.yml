@@ -16,7 +16,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: monthly-costs
+        working-directory: 03-app-dotnet
 
     steps:
     - uses: actions/checkout@v3
