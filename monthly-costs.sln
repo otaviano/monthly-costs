@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.Infra.Bus", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EDA1C12F-8828-435F-ACEF-DF2FC2E1C293}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyCosts.UnitTests", "tests\MonthlyCosts.UnitTests\MonthlyCosts.UnitTests.csproj", "{9A2A4040-C547-474A-B776-8F55BE131EAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyCosts.UnitTests", "src\tests\MonthlyCosts.UnitTests\MonthlyCosts.UnitTests.csproj", "{9A2A4040-C547-474A-B776-8F55BE131EAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
