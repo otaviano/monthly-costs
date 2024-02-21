@@ -13,6 +13,6 @@ public class DomainToViewModelProfile : Profile
         CreateMap<Cost, CostResponseViewModel>()
             .ForMember(p => p.PaymentMethod, q => q.MapFrom(p => p.PaymentMethod.Humanize()));
 
-        CreateMap<CostValue, CostValueViewModel>();
+        CreateMap<CostValue, CostValueRequestViewModel>();
     }
 }

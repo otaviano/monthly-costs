@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MonthlyCost.Application.Interfaces;
 using MonthlyCost.Application.ViewModels.v1;
+using MonthlyCosts.API.Filters;
 
 namespace MonthlyCosts.API.Controllers.v1
 {
@@ -9,32 +10,43 @@ namespace MonthlyCosts.API.Controllers.v1
     [Route("api/v{version:apiVersion}/[controller]")]
     public class CostValuesController : ControllerBase
     {
-        protected readonly ICostApplication _application;
+        protected readonly ICostValueApplication _application;
 
-        public CostValuesController(ICostApplication application)
+        public CostValuesController(ICostValueApplication application)
         {
             _application = application;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CostValueViewModel>> Get()
+        [ProducesResponseType(typeof(CostValueResponseViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
+        public ActionResult<IEnumerable<CostValueResponseViewModel>> Get()
         {
-            return Ok();
-            //_application.Get()
-            //    ?? Enumerable.Empty<CostValueViewModel>());
+            return Ok(_application.Get() 
+                ?? Enumerable.Empty<CostValueResponseViewModel>());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<CostValueViewModel> Get(Guid id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(CostValueResponseViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
+        public async Task<ActionResult<CostValueResponseViewModel>> GetAsync([FromRoute] Guid id)
         {
-            var result = _application.GetAsync(id);
+            var result = await _application.GetAsync(id);
             if (result is null) return NotFound();
 
-            return Ok();
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CostRequestViewModel cost)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
+
+        public async Task<IActionResult> PostAsync([FromBody] CostValueRequestViewModel cost)
         {
             var id = await _application.CreateAsync(cost);
 
@@ -42,19 +54,28 @@ namespace MonthlyCosts.API.Controllers.v1
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] CostValueViewModel cost)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(CostRequestViewModel), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
+
+        public async Task<IActionResult> PutAsync([FromRoute] Guid id, [FromBody] CostValueRequestViewModel cost)
         {
-            //await _application.Update(cost);
+            await _application.UpdateAsync(id, cost);
 
             return Accepted();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
+        public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
         {
             await _application.DeleteAsync(id);
 
-            return Accepted();
+            return Accepted(new { Id = id });
         }
     }
 }
