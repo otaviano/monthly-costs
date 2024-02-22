@@ -11,5 +11,11 @@ public class DomainToCommandProfile : Profile
         CreateMap<CreateCostCommand, Cost>();
         CreateMap<UpdateCostCommand, Cost>();
         CreateMap<DeleteCostCommand, Cost>();
+
+        CreateMap<CreateCostValueCommand, CostValue>()
+            .ForMember(p => p.Cost, q => q.MapFrom(p => new Cost { Id = p.CostId }));
+        CreateMap<UpdateCostValueCommand, CostValue>()
+            .ForMember(p => p.Cost, q => q.MapFrom(p => new Cost { Id = p.CostId }));
+        CreateMap<DeleteCostValueCommand, CostValue>();
     }
 }

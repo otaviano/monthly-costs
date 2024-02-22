@@ -9,5 +9,6 @@ namespace MonthlyCost.Application.Interfaces
         Task DeleteAsync(Guid id);
         IEnumerable<CostValueResponseViewModel> Get();
         Task<CostValueResponseViewModel> GetAsync(Guid id);
+        Task<decimal> SumAsync(Guid id);
     }
 }

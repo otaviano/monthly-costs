@@ -75,7 +75,19 @@ namespace MonthlyCosts.API.Controllers.v1
         {
             await _application.DeleteAsync(id);
 
-            return Accepted(new { Id = id });
+            return Accepted();
+        }
+
+        [HttpGet("{id}/sum")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(CostValueSumResponseViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
+        public async Task<ActionResult<CostValueSumResponseViewModel>> SumAsync([FromRoute] Guid id)
+        {
+            var total = await _application.SumAsync(id);
+
+            return Ok(new { total });
         }
     }
 }

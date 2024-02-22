@@ -30,5 +30,6 @@ public static class DataSetupExtension
     public static void AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<ICostNoSqlRepository, CostMongoDbRepository>();
+        services.AddScoped<ICostValueNoSqlRepository, CostValueMongoDbRepository>();
     }
 }

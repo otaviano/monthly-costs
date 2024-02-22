@@ -6,7 +6,6 @@ namespace MonthlyCosts.Domain.Entities
     {
         [BsonId]
         public Guid Id { get; set; }
-        [BsonElement("Name")]
         public Cost Cost { get; set; }
         public decimal Value { get; set; }
         public DateOnly Month { get; set; }

@@ -59,8 +59,13 @@ public class CostValueApplication : ICostValueApplication
         if(id.Equals(Guid.Empty))
             throw new ArgumentNullException(nameof(id), $"Error mapping to #{nameof(DeleteCostValueCommand)}");
 
-        var command = new DeleteCostCommand { Id = id };
+        var command = new DeleteCostValueCommand { Id = id };
 
         await _bus.SendCommand(command);
+    }
+
+    public async Task<decimal> SumAsync(Guid id)
+    {
+        return await _queryRepository.SumAsync(id);
     }
 }

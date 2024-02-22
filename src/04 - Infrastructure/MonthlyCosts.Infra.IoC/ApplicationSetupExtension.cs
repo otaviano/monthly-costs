@@ -2,13 +2,13 @@
 using MonthlyCost.Application;
 using MonthlyCost.Application.Interfaces;
 
-namespace MonthlyCosts.Infra.IoC
+namespace MonthlyCosts.Infra.IoC;
+
+public static class ApplicationSetupExtension
 {
-    public static class ApplicationSetupExtension
+    public static void AddApplication(this IServiceCollection services)
     {
-        public static void AddApplication(this IServiceCollection services)
-        {
-            services.AddScoped<ICostApplication, CostApplication>();
-        }
+        services.AddScoped<ICostApplication, CostApplication>();
+        services.AddScoped<ICostValueApplication, CostValueApplication>();
     }
 }

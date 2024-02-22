@@ -50,6 +50,17 @@ public class CostValueMongoDbRepository : ICostValueNoSqlRepository
     }
     public async Task Delete(Guid id)
     {
-        await dbContext.Collection.DeleteOneAsync(p => p.Id == id);
+        var result = await dbContext.Collection.DeleteOneAsync(p => p.Id == id);
+
+        Console.WriteLine(result); 
+    }
+
+    public async Task<decimal> SumAsync(Guid costId)
+    {
+        var queryResult = await dbContext.Collection
+            .FindAsync(x => x.Cost.Id == costId && x.Month.Month == DateTime.Now.Month);
+        var total = await queryResult.ToListAsync();
+
+        return total.Sum(x => x.Value);
     }
 }

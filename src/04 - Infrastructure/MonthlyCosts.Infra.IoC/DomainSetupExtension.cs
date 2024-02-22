@@ -12,5 +12,9 @@ public static class DomainSetupExtension
         services.AddScoped<IRequestHandler<CreateCostCommand, Unit>, CostCommandHandler>();
         services.AddScoped<IRequestHandler<DeleteCostCommand, Unit>, CostCommandHandler>();
         services.AddScoped<IRequestHandler<UpdateCostCommand, Unit>, CostCommandHandler>();
+
+        services.AddScoped<IRequestHandler<CreateCostValueCommand, Unit>, CostValueCommandHandler>();
+        services.AddScoped<IRequestHandler<DeleteCostValueCommand, Unit>, CostValueCommandHandler>();
+        services.AddScoped<IRequestHandler<UpdateCostValueCommand, Unit>, CostValueCommandHandler>();
     }
 }

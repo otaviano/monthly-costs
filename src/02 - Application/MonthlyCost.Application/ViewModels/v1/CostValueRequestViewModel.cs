@@ -2,4 +2,7 @@
 
 public class CostValueRequestViewModel
 {
+    public Guid CostId { get; set; }
+    public decimal Value { get; set; }
+    public DateOnly Month { get; set; }
 }
