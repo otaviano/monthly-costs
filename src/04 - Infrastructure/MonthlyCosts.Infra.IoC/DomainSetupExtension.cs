@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MonthlyCosts.Domain.Commands;
+using MonthlyCosts.Domain.Events;
 using MonthlyCosts.Domain.Services.CommandHandlers;
+using MonthlyCosts.Domain.Services.EventHandlers;
 
 namespace MonthlyCosts.Infra.IoC;
 
@@ -16,5 +18,7 @@ public static class DomainSetupExtension
         services.AddScoped<IRequestHandler<CreateCostValueCommand, Unit>, CostValueCommandHandler>();
         services.AddScoped<IRequestHandler<DeleteCostValueCommand, Unit>, CostValueCommandHandler>();
         services.AddScoped<IRequestHandler<UpdateCostValueCommand, Unit>, CostValueCommandHandler>();
+
+        services.AddScoped<IRequestHandler<CreateCostEvent>, CostEventHandler>();
     }
 }

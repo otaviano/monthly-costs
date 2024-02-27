@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MonthlyCosts.Domain.Core.Bus;
 using MonthlyCosts.Domain.Core.Commands;
+using MonthlyCosts.Domain.Core.Events;
 
 namespace MonthlyCosts.Infra.Bus;
 
@@ -17,4 +18,10 @@ public sealed class InMemoryBus : IMediatorHandler
     {
         return mediator.Send(command);
     }
+
+    public Task SendEvent<T>(T command) where T : Event<T>
+    {
+        return mediator.Send(command);
+    }
+
 }

@@ -16,6 +16,12 @@ services:
       SA_PASSWORD: "Odb12345678"
       ACCEPT_EULA: "Y"
 
+  rabbitmq:
+    container_name: rabbitmq
+    ports:
+      - "8080:15672" # Important: In a production environment your should remove the external port
+      - "5672:5672" # Important: In a production environment your should remove the external port
+
   monthlycosts-api:
     container_name: monthlycosts-api
     environment:

@@ -17,6 +17,6 @@ public class ViewModelToCommandProfile : Profile
 
         CreateMap<CostValueRequestViewModel, CreateCostValueCommand>()
           .ForMember(p => p.Id, q => q.MapFrom(p => Guid.NewGuid()));
-        CreateMap<CostRequestViewModel, UpdateCostCommand>();
+        CreateMap<CostValueRequestViewModel, UpdateCostValueCommand>();
     }
 }

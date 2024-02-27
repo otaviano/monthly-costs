@@ -11,6 +11,8 @@ public static class AutoMapperConfiguration
             p.AddProfile(new DomainToViewModelProfile());
             p.AddProfile(new DomainToCommandProfile());
             p.AddProfile(new ViewModelToCommandProfile());
+            p.AddProfile(new ViewModelToEventProfile());
+            p.AddProfile(new DomainToEventProfile());
         });
     }
 }

@@ -19,13 +19,14 @@ builder.Services.AddApplication();
 builder.Services.AddRepositories();
 builder.Services.AddNoSqlConnection();
 builder.Services.AddMessageBrokerInMemmory();
+builder.Services.AddRabbitMq(configuration);
 
 var app = builder.Build();
-var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
 // Configure the HTTP request pipeline.
-app.ConfigureSwagger(configuration, provider);
+app.ConfigureSwagger(configuration);
 app.ConfigureHealthCheckEndpoints(configuration);
+app.ConfigureRabbitMq();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

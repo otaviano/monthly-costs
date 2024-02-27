@@ -1,23 +1,20 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using MonthlyCosts.Domain.Settings;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Azure;
-using Microsoft.AspNetCore.Components;
-using System.Reflection.Metadata;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MonthlyCosts.Infra.IoC;
 
 [ExcludeFromCodeCoverage]
 public static class SwaggerSetupExtensions
 {
-    public static void ConfigureSwagger(this IApplicationBuilder app, IConfiguration configuration, IApiVersionDescriptionProvider provider)
+    public static void ConfigureSwagger(this IApplicationBuilder app, IConfiguration configuration)
     {
+        var provider = app.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
         var settings = configuration.GetSection(SwaggerSettings.SectionName).Get<SwaggerSettings>()
           ?? throw new NullReferenceException($"Missing #{nameof(SwaggerSettings)} on the app settings");
 
