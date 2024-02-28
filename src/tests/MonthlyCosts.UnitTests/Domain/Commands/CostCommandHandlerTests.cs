@@ -2,13 +2,12 @@
 using FluentAssertions;
 using LinxCommerce.Delivery.UnitTests.NSubstitute;
 using MonthlyCosts.Domain.Commands;
-using MonthlyCosts.Domain.Entities;
 using MonthlyCosts.Domain.Events;
 using MonthlyCosts.Domain.Services.CommandHandlers;
 using NSubstitute;
 using Xunit;
 
-namespace MonthlyCosts.UnitTests.Domain;
+namespace MonthlyCosts.UnitTests.Domain.Commands;
 
 public class CostCommandHandlerTests
 {
@@ -17,7 +16,7 @@ public class CostCommandHandlerTests
        [Substitute] CostCommandHandler sut,
        CreateCostCommand request)
     {
-        var result = await sut.Handle(request,new CancellationToken());
+        var result = await sut.Handle(request, new CancellationToken());
 
         result.Should().NotBeNull();
         sut._eventBus.Received(1).Publish(Arg.Any<CreateCostEvent>());

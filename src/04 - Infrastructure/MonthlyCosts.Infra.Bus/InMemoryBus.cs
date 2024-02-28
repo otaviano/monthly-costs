@@ -19,7 +19,7 @@ public sealed class InMemoryBus : IMediatorHandler
         return mediator.Send(command);
     }
 
-    public Task SendEvent<T>(T @event) where T : Event<T>
+    public Task SendEvent<T>(T @event) where T : Event
     {
         return mediator.Send(@event);
     }

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
 using MonthlyCosts.Domain.Commands;
+using MonthlyCosts.Domain.Core.Bus;
 using MonthlyCosts.Domain.Core.CommandHandlers;
+using MonthlyCosts.Domain.Core.Events;
 using MonthlyCosts.Domain.Entities;
+using MonthlyCosts.Domain.Events;
 using MonthlyCosts.Domain.Interfaces;
 
 namespace MonthlyCosts.Domain.Services.CommandHandlers;
@@ -14,26 +17,25 @@ public class CostValueCommandHandler : CommandHandler,
 {
     protected readonly IMapper _mapper;
     //protected readonly ICostValueRepository costRepository;
-    public readonly ICostValueNoSqlRepository _costNoSqlRepository;
+    public readonly IRabbitMQEventBus _eventBus;
 
     public CostValueCommandHandler(
         IMapper mapper,
-        //ICostRepository costRepository, 
-        ICostValueNoSqlRepository costValueNoSqlRepository)
+        //ICostValueRepository costRepository, 
+        IRabbitMQEventBus eventBus)
     {
         _mapper = mapper;
         //_costRepository = costRepository;
-        _costNoSqlRepository = costValueNoSqlRepository;
+        _eventBus = eventBus;
     }
     
     public async Task<Unit> Handle(CreateCostValueCommand request, CancellationToken cancellationToken)
     {
         ValidateAndThrow(request);
 
-        var cost = _mapper.Map<CostValue>(request);
+        var @event = _mapper.Map<CreateCostValueEvent>(request);
 
-        //await homeBrokerRepository.Create(homeBroker);
-        await _costNoSqlRepository.Create(cost);
+        _eventBus.Publish(@event);
 
         return await Unit.Task;
     }
@@ -42,10 +44,9 @@ public class CostValueCommandHandler : CommandHandler,
     {
         ValidateAndThrow(request);
 
-        var cost = _mapper.Map<CostValue>(request);
+        var @event = _mapper.Map<UpdateCostValueEvent>(request);
 
-        //await homeBrokerRepository.Update(homeBroker);
-        await _costNoSqlRepository.Update(cost);
+        _eventBus.Publish(@event);
 
         return await Unit.Task;
     }
@@ -53,7 +54,9 @@ public class CostValueCommandHandler : CommandHandler,
     public async Task<Unit> Handle(DeleteCostValueCommand request, CancellationToken cancellationToken)
     {
         ValidateAndThrow(request);
-        await _costNoSqlRepository.Delete(request.Id);
+        
+        var @event = _mapper.Map<DeleteCostValueEvent>(request);
+        _eventBus.Publish(@event);
 
         return await Unit.Task;
     }

@@ -4,7 +4,7 @@ using MonthlyCosts.Domain.Entities;
 
 namespace MonthlyCosts.Domain.Events;
 
-public class CreateCostEvent : Event<CreateCostEvent>, IRequest
+public class CreateCostEvent : Event
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

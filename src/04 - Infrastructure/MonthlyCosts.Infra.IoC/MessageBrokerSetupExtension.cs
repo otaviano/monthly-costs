@@ -39,8 +39,10 @@ public static class MessageBrokerSetupExtension
         listener.Subscribe<CreateCostEvent>();
         listener.Subscribe<UpdateCostEvent>();
         listener.Subscribe<DeleteCostEvent>();
+        listener.Subscribe<CreateCostValueEvent>();
+        listener.Subscribe<UpdateCostValueEvent>();
+        listener.Subscribe<DeleteCostValueEvent>();
 
         return app;
     }
 }
-

@@ -11,10 +11,10 @@ using MonthlyCosts.Domain.Entities;
 
 namespace MonthlyCosts.Infra.Bus;
 
-public sealed class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
+public class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
 {
     private readonly IServiceProvider _serviceProvider;
-    private IModel _channel;
+    public IModel Channel { get; private set; }
     private readonly EventBusSettings _settings;
     private readonly IRabbitMQPersistentConnection _connection;
     private readonly static Dictionary<string, Type> _subsManager = new();
@@ -28,7 +28,33 @@ public sealed class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
         _settings = settings;
         _connection.TryConnect();
         _serviceProvider = serviceProvider;
-        _channel = CreateConsumerChannel();
+        Channel = CreateConsumerChannel();
+    }
+
+    public void Subscribe<T>() where T : IEvent
+    {
+        var eventName = typeof(T).Name;
+        var containsKey = _subsManager.ContainsKey(eventName);
+        if (!containsKey) _subsManager.Add(eventName, typeof(T));
+
+        _connection.TryConnect();
+        Channel.QueueBind(queue: _settings.QueueName,
+                          exchange: _settings.BrokerName,
+                          routingKey: eventName);
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposing) return;
+        
+        _connection.Dispose();
+        Channel.Close();
     }
 
     private IModel CreateConsumerChannel()
@@ -43,11 +69,10 @@ public sealed class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
         consumer.Received += ReceivedEvent;
 
         channel.BasicConsume(queue: _settings.QueueName, autoAck: false, consumer: consumer);
-
         channel.CallbackException += (sender, ea) =>
         {
-            _channel.Dispose();
-            _channel = CreateConsumerChannel();
+            Channel.Dispose();
+            Channel = CreateConsumerChannel();
         };
 
         return channel;
@@ -59,7 +84,7 @@ public sealed class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
         var message = Encoding.UTF8.GetString(body);
         var eventName = e.RoutingKey;
         dynamic @event = GetEventType(eventName, message);
-        
+
         using (var scope = _serviceProvider.CreateScope())
         {
             var context = scope.ServiceProvider.GetRequiredService<IMediatorHandler>();
@@ -80,26 +105,4 @@ public sealed class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
         return @event;
     }
 
-    public void Subscribe<T>() where T : IEvent
-    {
-        var eventName = typeof(T).Name;
-        var containsKey = _subsManager.ContainsKey(eventName);
-        if (!containsKey)
-        {
-            _subsManager.Add(eventName, typeof(T));
-        }
-
-        _connection.TryConnect();
-
-        using var channel = _connection.CreateModel();
-        channel.QueueBind(queue: _settings.QueueName,
-                          exchange: _settings.BrokerName,
-                          routingKey: eventName);
-    }
-
-    public void Dispose()
-    {
-        _connection.Dispose();
-        _channel.Close();
-    }
 }

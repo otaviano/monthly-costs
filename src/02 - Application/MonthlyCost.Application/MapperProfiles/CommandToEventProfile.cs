@@ -11,5 +11,9 @@ public class CommandToEventProfile : Profile
         CreateMap<CreateCostCommand, CreateCostEvent>();
         CreateMap<UpdateCostCommand, UpdateCostEvent>();
         CreateMap<DeleteCostCommand, DeleteCostEvent>();
+
+        CreateMap<CreateCostValueCommand, CreateCostValueEvent>();
+        CreateMap<UpdateCostValueCommand, UpdateCostValueEvent>();
+        CreateMap<DeleteCostValueCommand, DeleteCostValueEvent>();
     }
 }

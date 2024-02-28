@@ -1,0 +1,19 @@
+﻿using AutoFixture.AutoNSubstitute;
+using LinxCommerce.Delivery.UnitTests.NSubstitute;
+using MonthlyCosts.Domain.Core.Bus;
+using MonthlyCosts.Domain.Events;
+using NSubstitute;
+using Xunit;
+
+namespace MonthlyCosts.UnitTests.Domain;
+
+public class RabbitMQEventBusTests
+{
+    [Theory, AutoNSubstituteData]
+    public void Handle_GivenAValidCreateCostEvent_ShouldNotThrowException(
+       [Substitute] RabbitMQEventBus sut,
+       CreateCostEvent request)
+    {
+        sut.Publish(request);
+    }
+}

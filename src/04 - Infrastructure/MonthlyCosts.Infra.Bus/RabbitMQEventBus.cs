@@ -12,10 +12,10 @@ using System.Text;
 namespace MonthlyCosts.Domain.Core.Bus;
 
 
-public sealed class RabbitMQEventBus : IDisposable, IRabbitMQEventBus
+public class RabbitMQEventBus : IRabbitMQEventBus, IDisposable
 {
     private const string RetryAfterErrorMsg = "Retrying message because of error {0}";
-    private bool disposedValue = false; // To detect redundant calls
+    private bool disposedValue = false;
 
     private readonly EventBusSettings _settings;
     private readonly IRabbitMQPersistentConnection _connection;
@@ -51,6 +51,18 @@ public sealed class RabbitMQEventBus : IDisposable, IRabbitMQEventBus
 
         policy.Execute(Publish(model, eventName, message, body));
     }
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposing || disposedValue) return;
+
+        _subsManager.Clear();
+        disposedValue = true;
+    }
 
     private Action Publish(IModel model, string eventName, string message, byte[] body)
     {
@@ -75,13 +87,5 @@ public sealed class RabbitMQEventBus : IDisposable, IRabbitMQEventBus
         };
     }
 
-    void IDisposable.Dispose()
-    {
-        if (!disposedValue)
-        {
-            _subsManager.Clear();
-            disposedValue = true;
-        }
-    }
 }
 

@@ -50,7 +50,7 @@ namespace MonthlyCosts.API.Controllers.v1
         {
             var id = await _application.CreateAsync(cost);
 
-            return Accepted(new { Id = id });
+            return Accepted($"{Request.Scheme}://{Request.Host}/api/v1/costValues/{id}", new { id });
         }
 
         [HttpPut("{id}")]
@@ -63,7 +63,7 @@ namespace MonthlyCosts.API.Controllers.v1
         {
             await _application.UpdateAsync(id, cost);
 
-            return Accepted();
+            return Accepted($"{Request.Scheme}://{Request.Host}/api/v1/costValues/{id}", new { id });
         }
 
         [HttpDelete("{id}")]
@@ -75,7 +75,7 @@ namespace MonthlyCosts.API.Controllers.v1
         {
             await _application.DeleteAsync(id);
 
-            return Accepted();
+            return Accepted($"{Request.Scheme}://{Request.Host}/api/v1/costValues/{id}");
         }
 
         [HttpGet("{id}/sum")]

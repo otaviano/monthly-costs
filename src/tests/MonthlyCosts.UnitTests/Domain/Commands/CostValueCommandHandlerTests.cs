@@ -2,13 +2,12 @@
 using FluentAssertions;
 using LinxCommerce.Delivery.UnitTests.NSubstitute;
 using MonthlyCosts.Domain.Commands;
-using MonthlyCosts.Domain.Entities;
-using MonthlyCosts.Domain.Events;
+using MonthlyCosts.Domain.Core.Events;
 using MonthlyCosts.Domain.Services.CommandHandlers;
 using NSubstitute;
 using Xunit;
 
-namespace MonthlyCosts.UnitTests.Domain;
+namespace MonthlyCosts.UnitTests.Domain.Commands;
 
 public class CostValueCommandHandlerTests
 {
@@ -17,10 +16,10 @@ public class CostValueCommandHandlerTests
        [Substitute] CostValueCommandHandler sut,
        CreateCostValueCommand request)
     {
-        var result = await sut.Handle(request,new CancellationToken());
+        var result = await sut.Handle(request, new CancellationToken());
 
         result.Should().NotBeNull();
-        await sut._costNoSqlRepository.Received(1).Create(Arg.Any<CostValue>());
+        sut._eventBus.Received(1).Publish(Arg.Any<IEvent>());
     }
 
     [Theory, AutoNSubstituteData]
@@ -31,7 +30,7 @@ public class CostValueCommandHandlerTests
         var result = await sut.Handle(request, new CancellationToken());
 
         result.Should().NotBeNull();
-        await sut._costNoSqlRepository.Received(1).Update(Arg.Any<CostValue>());
+        sut._eventBus.Received(1).Publish(Arg.Any<IEvent>());
     }
 
     [Theory, AutoNSubstituteData]
@@ -42,6 +41,6 @@ public class CostValueCommandHandlerTests
         var result = await sut.Handle(request, new CancellationToken());
 
         result.Should().NotBeNull();
-        await sut._costNoSqlRepository.Received(1).Delete(Arg.Any<Guid>());
+        sut._eventBus.Received(1).Publish(Arg.Any<IEvent>());
     }
 }
