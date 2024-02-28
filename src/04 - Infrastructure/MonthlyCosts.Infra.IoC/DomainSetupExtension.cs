@@ -20,5 +20,7 @@ public static class DomainSetupExtension
         services.AddScoped<IRequestHandler<UpdateCostValueCommand, Unit>, CostValueCommandHandler>();
 
         services.AddScoped<IRequestHandler<CreateCostEvent>, CostEventHandler>();
+        services.AddScoped<IRequestHandler<UpdateCostEvent>, CostEventHandler>();
+        services.AddScoped<IRequestHandler<DeleteCostEvent>, CostEventHandler>();
     }
 }

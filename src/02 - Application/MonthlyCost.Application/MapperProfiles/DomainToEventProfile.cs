@@ -9,5 +9,7 @@ public class DomainToEventProfile : Profile
     public DomainToEventProfile()
     {
         CreateMap<CreateCostEvent, Cost>();
+        CreateMap<UpdateCostEvent, Cost>();
+        CreateMap<DeleteCostEvent, Cost>();
     }
 }

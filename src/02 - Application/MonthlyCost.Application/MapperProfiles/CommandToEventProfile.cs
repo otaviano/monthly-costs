@@ -4,10 +4,12 @@ using MonthlyCosts.Domain.Events;
 
 namespace MonthlyCost.Application.MapperProfiles;
 
-public class ViewModelToEventProfile : Profile
+public class CommandToEventProfile : Profile
 {
-    public ViewModelToEventProfile()
+    public CommandToEventProfile()
     {
         CreateMap<CreateCostCommand, CreateCostEvent>();
+        CreateMap<UpdateCostCommand, UpdateCostEvent>();
+        CreateMap<DeleteCostCommand, DeleteCostEvent>();
     }
 }

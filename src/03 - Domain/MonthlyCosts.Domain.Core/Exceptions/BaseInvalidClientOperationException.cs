@@ -21,7 +21,7 @@ public abstract class BaseInvalidClientOperationException : Exception
         StatusCode = statusCode;
     }
 
-    protected BaseInvalidClientOperationException(string? message, HttpStatusCode statusCode, Exception innerException = null) : base(message)
+    protected BaseInvalidClientOperationException(string message, HttpStatusCode statusCode, Exception innerException = null) : base(message)
     {
         StatusCode = statusCode;
     }

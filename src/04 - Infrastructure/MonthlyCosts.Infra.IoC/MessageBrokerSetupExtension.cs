@@ -35,12 +35,10 @@ public static class MessageBrokerSetupExtension
     public static IApplicationBuilder ConfigureRabbitMq(this IApplicationBuilder app)
     {
         var listener = app.ApplicationServices.GetService<IRabbitMQConsumer>();
-        //var life = app.ApplicationServices.GetService<IHostApplicationLifetime>();
 
         listener.Subscribe<CreateCostEvent>();
-
-        //life.ApplicationStarted.Register(()=> Listener.StartConsuming());
-        //life.ApplicationStopping.Register(() => Listener.Close());
+        listener.Subscribe<UpdateCostEvent>();
+        listener.Subscribe<DeleteCostEvent>();
 
         return app;
     }

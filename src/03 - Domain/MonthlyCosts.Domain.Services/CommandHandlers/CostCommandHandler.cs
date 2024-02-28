@@ -48,9 +48,10 @@ public class CostCommandHandler : CommandHandler,
         ValidateAndThrow(request);
 
         var cost = _mapper.Map<Cost>(request);
+        var @event = _mapper.Map<UpdateCostEvent>(request);
 
-        //await homeBrokerRepository.Update(homeBroker);
-        await _costNoSqlRepository.Update(cost);
+        //await costRepository.Update(cost);
+        eventBus.Publish(@event);
 
         return await Unit.Task;
     }
@@ -58,7 +59,10 @@ public class CostCommandHandler : CommandHandler,
     public async Task<Unit> Handle(DeleteCostCommand request, CancellationToken cancellationToken)
     {
         ValidateAndThrow(request);
-        await _costNoSqlRepository.Delete(request.Id);
+
+        //await costRepository.Delete(request.Id);
+        var @event = _mapper.Map<DeleteCostEvent>(request);
+        eventBus.Publish(@event);
 
         return await Unit.Task;
     }
