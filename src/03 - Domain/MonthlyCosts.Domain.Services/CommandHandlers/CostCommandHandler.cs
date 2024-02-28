@@ -17,7 +17,7 @@ public class CostCommandHandler : CommandHandler,
     protected readonly IMapper _mapper;
     //protected readonly ICostRepository costRepository;
     public readonly ICostNoSqlRepository _costNoSqlRepository;
-    protected readonly IRabbitMQEventBus eventBus;
+    public readonly IRabbitMQEventBus _eventBus;
     public CostCommandHandler(
         IMapper mapper,
         //ICostRepository costRepository, 
@@ -25,7 +25,7 @@ public class CostCommandHandler : CommandHandler,
         ICostNoSqlRepository costNoSqlRepository)
     {
         _mapper = mapper;
-        this.eventBus = eventBus;
+        this._eventBus = eventBus;
         //_costRepository = costRepository;
         _costNoSqlRepository = costNoSqlRepository;
     }
@@ -38,7 +38,7 @@ public class CostCommandHandler : CommandHandler,
         var @event = _mapper.Map<CreateCostEvent>(request);
 
         //await costSqlRepository.Create(cost);
-        eventBus.Publish(@event);
+        _eventBus.Publish(@event);
 
         return await Unit.Task;
     }
@@ -51,7 +51,7 @@ public class CostCommandHandler : CommandHandler,
         var @event = _mapper.Map<UpdateCostEvent>(request);
 
         //await costRepository.Update(cost);
-        eventBus.Publish(@event);
+        _eventBus.Publish(@event);
 
         return await Unit.Task;
     }
@@ -62,7 +62,7 @@ public class CostCommandHandler : CommandHandler,
 
         //await costRepository.Delete(request.Id);
         var @event = _mapper.Map<DeleteCostEvent>(request);
-        eventBus.Publish(@event);
+        _eventBus.Publish(@event);
 
         return await Unit.Task;
     }

@@ -21,6 +21,14 @@ namespace LinxCommerce.Delivery.UnitTests.NSubstitute
             var fixture = new Fixture();
 
             fixture.Register(ConfigureMapper);
+            fixture.Register(() => {
+                var gen = new Random();
+                
+                var start = new DateTime(1995, 1, 1);
+                int range = (DateTime.Today - start).Days;
+
+                return DateOnly.FromDateTime(start.AddDays(gen.Next(range)));
+            });
             fixture.Customize(new AutoNSubstituteCustomization());
             fixture.Customize<CostRequestViewModel>(p => p
                 .With(p => p.PaymentMethod, GetRandomPaymentMethod()));
@@ -39,12 +47,7 @@ namespace LinxCommerce.Delivery.UnitTests.NSubstitute
 
         private static IMapper ConfigureMapper()
         {
-            var config = new MapperConfiguration(p =>
-            {
-                p.AddProfile(new DomainToViewModelProfile());
-                p.AddProfile(new DomainToCommandProfile());
-                p.AddProfile(new ViewModelToCommandProfile());
-            });
+            var config = AutoMapperConfiguration.RegisterMappings();
 
             var mapper = config.CreateMapper();
             return mapper;
