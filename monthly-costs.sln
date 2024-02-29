@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EDA1C12F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonthlyCosts.UnitTests", "src\tests\MonthlyCosts.UnitTests\MonthlyCosts.UnitTests.csproj", "{9A2A4040-C547-474A-B776-8F55BE131EAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyCosts.Infra.Data.SqlServer", "src\04 - Infrastructure\MonthlyCosts.Infra.Data.SqlServer\MonthlyCosts.Infra.Data.SqlServer.csproj", "{73BC0CEF-E101-4EEA-AE94-03A21983C331}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{9A2A4040-C547-474A-B776-8F55BE131EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A2A4040-C547-474A-B776-8F55BE131EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A2A4040-C547-474A-B776-8F55BE131EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73BC0CEF-E101-4EEA-AE94-03A21983C331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73BC0CEF-E101-4EEA-AE94-03A21983C331}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73BC0CEF-E101-4EEA-AE94-03A21983C331}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73BC0CEF-E101-4EEA-AE94-03A21983C331}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +106,7 @@ Global
 		{5119AEE5-B179-4DFD-8612-C1B95EC9B47D} = {5862AAA5-0FF3-42EB-946B-81099FEF616F}
 		{CBE11EFA-014C-41F5-8AF6-D5B20A4C49F3} = {5862AAA5-0FF3-42EB-946B-81099FEF616F}
 		{9A2A4040-C547-474A-B776-8F55BE131EAE} = {EDA1C12F-8828-435F-ACEF-DF2FC2E1C293}
+		{73BC0CEF-E101-4EEA-AE94-03A21983C331} = {5862AAA5-0FF3-42EB-946B-81099FEF616F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2439EC12-48DA-411D-AC2A-8419F444F3F0}

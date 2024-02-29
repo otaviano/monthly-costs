@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using MonthlyCosts.API.Filters;
 using MonthlyCosts.Infra.IoC;
 
@@ -17,13 +16,16 @@ builder.Services.AddHttpConfiguration(typeof(HttpGlobalExceptionFilter));
 builder.Services.AddDomain();
 builder.Services.AddApplication();
 builder.Services.AddRepositories();
+builder.Services.AddSqlConnection(configuration);
 builder.Services.AddNoSqlConnection();
 builder.Services.AddMessageBrokerInMemmory();
 builder.Services.AddRabbitMq(configuration);
 
-var app = builder.Build();
+var app = builder
+    .Build();
 
 // Configure the HTTP request pipeline.
+app.ConfigureMigrations(configuration, "monthly_costs_db");
 app.ConfigureSwagger(configuration);
 app.ConfigureHealthCheckEndpoints(configuration);
 app.ConfigureRabbitMq();

@@ -15,19 +15,16 @@ public class CostCommandHandler : CommandHandler,
     IRequestHandler<DeleteCostCommand, Unit>
 {
     protected readonly IMapper _mapper;
-    //protected readonly ICostRepository costRepository;
-    public readonly ICostNoSqlRepository _costNoSqlRepository;
+    protected readonly ICostSqlRepository _costRepository;
     public readonly IRabbitMQEventBus _eventBus;
     public CostCommandHandler(
         IMapper mapper,
-        //ICostRepository costRepository, 
-        IRabbitMQEventBus eventBus,
-        ICostNoSqlRepository costNoSqlRepository)
+        ICostSqlRepository costRepository, 
+        IRabbitMQEventBus eventBus)
     {
         _mapper = mapper;
-        this._eventBus = eventBus;
-        //_costRepository = costRepository;
-        _costNoSqlRepository = costNoSqlRepository;
+        _eventBus = eventBus;
+        _costRepository = costRepository;
     }
     
     public async Task<Unit> Handle(CreateCostCommand request, CancellationToken cancellationToken)
@@ -36,8 +33,7 @@ public class CostCommandHandler : CommandHandler,
 
         var cost = _mapper.Map<Cost>(request);
         var @event = _mapper.Map<CreateCostEvent>(request);
-
-        //await costSqlRepository.Create(cost);
+        await _costRepository.Create(cost);
         _eventBus.Publish(@event);
 
         return await Unit.Task;
@@ -49,8 +45,7 @@ public class CostCommandHandler : CommandHandler,
 
         var cost = _mapper.Map<Cost>(request);
         var @event = _mapper.Map<UpdateCostEvent>(request);
-
-        //await costRepository.Update(cost);
+        await _costRepository.Update(cost);
         _eventBus.Publish(@event);
 
         return await Unit.Task;
@@ -60,7 +55,7 @@ public class CostCommandHandler : CommandHandler,
     {
         ValidateAndThrow(request);
 
-        //await costRepository.Delete(request.Id);
+        await _costRepository.Delete(request.Id);
         var @event = _mapper.Map<DeleteCostEvent>(request);
         _eventBus.Publish(@event);
 

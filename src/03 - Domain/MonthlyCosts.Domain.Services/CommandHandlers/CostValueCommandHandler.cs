@@ -16,25 +16,26 @@ public class CostValueCommandHandler : CommandHandler,
     IRequestHandler<DeleteCostValueCommand, Unit>
 {
     protected readonly IMapper _mapper;
-    //protected readonly ICostValueRepository costRepository;
+    protected readonly ICostValueSqlRepository _costValueRepository;
     public readonly IRabbitMQEventBus _eventBus;
 
     public CostValueCommandHandler(
         IMapper mapper,
-        //ICostValueRepository costRepository, 
-        IRabbitMQEventBus eventBus)
+        IRabbitMQEventBus eventBus,
+        ICostValueSqlRepository costValueRepository)
     {
         _mapper = mapper;
-        //_costRepository = costRepository;
         _eventBus = eventBus;
+        _costValueRepository = costValueRepository;
     }
     
     public async Task<Unit> Handle(CreateCostValueCommand request, CancellationToken cancellationToken)
     {
         ValidateAndThrow(request);
-
+        
+        var costValue = _mapper.Map<CostValue>(request);
         var @event = _mapper.Map<CreateCostValueEvent>(request);
-
+        await _costValueRepository.Create(costValue);
         _eventBus.Publish(@event);
 
         return await Unit.Task;
@@ -43,9 +44,9 @@ public class CostValueCommandHandler : CommandHandler,
     public async Task<Unit> Handle(UpdateCostValueCommand request, CancellationToken cancellationToken)
     {
         ValidateAndThrow(request);
-
+        var costValue = _mapper.Map<CostValue>(request);
         var @event = _mapper.Map<UpdateCostValueEvent>(request);
-
+        await _costValueRepository.Update(costValue);
         _eventBus.Publish(@event);
 
         return await Unit.Task;
@@ -54,7 +55,7 @@ public class CostValueCommandHandler : CommandHandler,
     public async Task<Unit> Handle(DeleteCostValueCommand request, CancellationToken cancellationToken)
     {
         ValidateAndThrow(request);
-        
+        await _costValueRepository.Delete(request.Id);
         var @event = _mapper.Map<DeleteCostValueEvent>(request);
         _eventBus.Publish(@event);
 

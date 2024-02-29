@@ -96,7 +96,7 @@ public class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
 
     private static dynamic GetEventType(string eventName, string message)
     {
-        Assembly assembly = typeof(Cost).Assembly;
+        var assembly = typeof(Cost).Assembly;
 
         Type eventType = assembly.GetType("MonthlyCosts.Domain.Events." + eventName);
         var obj = JsonConvert.DeserializeObject(message, eventType);
