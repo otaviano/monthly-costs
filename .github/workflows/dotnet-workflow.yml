@@ -39,8 +39,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2.1.0
       - run: dotnet test
+<<<<<<< HEAD
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
         with:
           files: test-results/**/*.xml
+=======
+      #- name: Publish Test Results
+      #  uses: EnricoMi/publish-unit-test-result-action/composite@v2
+       # if: always()
+        #with:
+         # files: |
+          #  test-results/**/*.xml
+           # test-results/**/*.trx
+            #test-results/**/*.json
+>>>>>>> fefe6dffadb8ebeb1b2c84bc009b43f0fca023e9
