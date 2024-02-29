@@ -2,15 +2,14 @@
 using MonthlyCosts.Domain.Entities;
 using MonthlyCosts.Domain.Interfaces;
 using System.Data;
-using System.Linq.Dynamic.Core;
 
 namespace MonthlyCosts.Infra.Data.SqlServer;
 
 public class CostSqlServerRepository : ICostSqlRepository
 {
     private readonly IDbConnection _dbConnection;
-    private const string GetAllQuery = "SELECT * FROM Costs";
-    private const string GetByIdQuery = "SELECT * FROM Costs WHERE id = @id";
+    private const string GetAllQuery = "SELECT * FROM [dbo].[Costs]";
+    private const string GetByIdQuery = "SELECT * FROM [dbo].[Costs] WHERE id = @id";
     private const string InsertQuery = "INSERT INTO [dbo].[Costs]([Id],[Name],[Avarage],[PaymentMethod]) VALUES(@Id,@Name,@Avarage,@PaymentMethod)";
     private const string UpdateQuery = "UPDATE [dbo].[Costs] SET [Name] = @Name, [Avarage] = @Avarage, [PaymentMethod] = @PaymentMethod WHERE [Id] = @Id";
     private const string DeleteQuery = "DELETE FROM [dbo].[Costs] WHERE id = @id";

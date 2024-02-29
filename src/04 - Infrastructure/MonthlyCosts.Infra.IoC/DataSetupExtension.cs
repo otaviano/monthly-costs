@@ -3,16 +3,13 @@ using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
-using MonthlyCosts.Domain.Entities;
 using MonthlyCosts.Domain.Interfaces;
 using MonthlyCosts.Infra.Data.MongoDb;
 using MonthlyCosts.Infra.Data.SqlServer;
 using Stocks.Billing.Infra.Data.MongoDb.Context;
-using System.Reflection;
 
 namespace MonthlyCosts.Infra.IoC;
 

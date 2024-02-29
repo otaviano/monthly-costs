@@ -3,7 +3,6 @@ using MediatR;
 using MonthlyCosts.Domain.Commands;
 using MonthlyCosts.Domain.Core.Bus;
 using MonthlyCosts.Domain.Core.CommandHandlers;
-using MonthlyCosts.Domain.Core.Events;
 using MonthlyCosts.Domain.Entities;
 using MonthlyCosts.Domain.Events;
 using MonthlyCosts.Domain.Interfaces;
