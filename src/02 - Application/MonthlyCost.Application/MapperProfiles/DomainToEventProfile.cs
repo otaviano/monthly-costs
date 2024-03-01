@@ -14,8 +14,6 @@ public class DomainToEventProfile : Profile
 
         CreateMap<CreateCostValueEvent, CostValue>()
             .ForMember(p => p.Cost, q => q.MapFrom(p => new Cost{ Id = p.CostId }));
-        CreateMap<UpdateCostValueEvent, CostValue>()
-            .ForMember(p => p.Cost, q => q.MapFrom(p => new Cost { Id = p.CostId }));
         CreateMap<DeleteCostValueEvent, CostValue>();
     }
 }

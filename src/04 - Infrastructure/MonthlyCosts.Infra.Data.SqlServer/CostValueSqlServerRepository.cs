@@ -8,39 +8,38 @@ namespace MonthlyCosts.Infra.Data.SqlServer;
 public class CostValueSqlServerRepository : ICostValueSqlRepository
 {
     private readonly IDbConnection _dbConnection;
-    private const string GetAllQuery = "SELECT * FROM CostValues";
-    private const string GetByIdQuery = "SELECT * FROM CostValues WHERE id = @id";
-    private const string InsertQuery = "";
-    private const string UpdateQuery = "UPDATE CostValues SET name = @Name, avarage=@Avarage WHERE id = @Id";
-    private const string DeleteQuery = "DELETE FROM CostValues WHERE id = @id";
+    private const string GetAllQuery = "SELECT * FROM [dbo].[CostValues]";
+    private const string GetByIdQuery = "SELECT * FROM [dbo].[CostValues] WHERE [id] = @id";
+    private const string InsertQuery = "INSERT INTO [dbo].[CostValues] ([Id],[CostId],[Value],[Month]) VALUES(@Id,@CostId,@Value,@Month)";
+    private const string DeleteQuery = "DELETE FROM [dbo].[CostValues] WHERE [id] = @id";
 
     public CostValueSqlServerRepository(IDbConnection dbConnection)
     {
         _dbConnection = dbConnection;
     }
 
-    public async Task Create(CostValue cost)
+    public async Task Create(CostValue costValue)
     {
-        await _dbConnection.ExecuteAsync(InsertQuery, cost);
-    }
+        var @params = new
+        {
+            costValue.Id,
+            costValue.Value,
+            Month = costValue.Month.ToDateTime(TimeOnly.MinValue),
+            CostId = costValue.Cost?.Id
+        };
 
-    public async Task Update(CostValue cost)
-    {
-        await _dbConnection.ExecuteAsync(UpdateQuery, cost);
+        await _dbConnection.ExecuteAsync(InsertQuery, @params);
     }
-
     public async Task Delete(Guid id)
     {
-        await _dbConnection.ExecuteAsync(DeleteQuery, id);
+        await _dbConnection.ExecuteAsync(DeleteQuery, new { id });
     }
-
     public async Task<IEnumerable<CostValue>> GetAllAsync()
     {
         return await _dbConnection.QueryAsync<CostValue>(GetAllQuery);
     }
-
     public async Task<CostValue> GetAsync(Guid id)
     {
-        return await _dbConnection.QueryFirstAsync<CostValue>(GetByIdQuery, id);
+        return await _dbConnection.QueryFirstAsync<CostValue>(GetByIdQuery, new { id });
     }
 }

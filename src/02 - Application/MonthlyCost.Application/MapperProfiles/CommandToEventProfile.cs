@@ -13,7 +13,6 @@ public class CommandToEventProfile : Profile
         CreateMap<DeleteCostCommand, DeleteCostEvent>();
 
         CreateMap<CreateCostValueCommand, CreateCostValueEvent>();
-        CreateMap<UpdateCostValueCommand, UpdateCostValueEvent>();
         CreateMap<DeleteCostValueCommand, DeleteCostValueEvent>();
     }
 }

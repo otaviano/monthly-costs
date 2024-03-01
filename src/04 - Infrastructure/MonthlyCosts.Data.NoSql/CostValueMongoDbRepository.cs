@@ -44,17 +44,12 @@ public class CostValueMongoDbRepository : ICostValueNoSqlRepository
     {
         await dbContext.Collection.InsertOneAsync(cost);
     }
-    public async Task Update(CostValue cost)
-    {
-        await dbContext.Collection.ReplaceOneAsync(filter: g => g.Id == cost.Id, replacement: cost);
-    }
     public async Task Delete(Guid id)
     {
         var result = await dbContext.Collection.DeleteOneAsync(p => p.Id == id);
 
         Console.WriteLine(result); 
     }
-
     public async Task<decimal> SumAsync(Guid costId)
     {
         var queryResult = await dbContext.Collection

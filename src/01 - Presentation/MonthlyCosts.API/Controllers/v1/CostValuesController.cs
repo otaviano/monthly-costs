@@ -46,22 +46,9 @@ namespace MonthlyCosts.API.Controllers.v1
         [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
 
-        public async Task<IActionResult> PostAsync([FromBody] CostValueRequestViewModel cost)
+        public async Task<IActionResult> PostAsync([FromBody] CostValueRequestViewModel costValue)
         {
-            var id = await _application.CreateAsync(cost);
-
-            return Accepted($"{Request.Scheme}://{Request.Host}/api/v1/costValues/{id}", new { id });
-        }
-
-        [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(CostRequestViewModel), StatusCodes.Status202Accepted)]
-        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(typeof(JsonErrorResponse), StatusCodes.Status422UnprocessableEntity)]
-
-        public async Task<IActionResult> PutAsync([FromRoute] Guid id, [FromBody] CostValueRequestViewModel cost)
-        {
-            await _application.UpdateAsync(id, cost);
+            var id = await _application.CreateAsync(costValue);
 
             return Accepted($"{Request.Scheme}://{Request.Host}/api/v1/costValues/{id}", new { id });
         }

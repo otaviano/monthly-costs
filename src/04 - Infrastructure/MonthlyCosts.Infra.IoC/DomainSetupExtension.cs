@@ -17,14 +17,12 @@ public static class DomainSetupExtension
 
         services.AddScoped<IRequestHandler<CreateCostValueCommand, Unit>, CostValueCommandHandler>();
         services.AddScoped<IRequestHandler<DeleteCostValueCommand, Unit>, CostValueCommandHandler>();
-        services.AddScoped<IRequestHandler<UpdateCostValueCommand, Unit>, CostValueCommandHandler>();
 
         services.AddScoped<IRequestHandler<CreateCostEvent>, CostEventHandler>();
         services.AddScoped<IRequestHandler<UpdateCostEvent>, CostEventHandler>();
         services.AddScoped<IRequestHandler<DeleteCostEvent>, CostEventHandler>();
 
         services.AddScoped<IRequestHandler<CreateCostValueEvent>, CostValueEventHandler>();
-        services.AddScoped<IRequestHandler<UpdateCostValueEvent>, CostValueEventHandler>();
         services.AddScoped<IRequestHandler<DeleteCostValueEvent>, CostValueEventHandler>();
     }
 }

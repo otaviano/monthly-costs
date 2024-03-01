@@ -9,7 +9,6 @@ namespace MonthlyCosts.Domain.Interfaces
         Task Delete(Guid id);
         Task<CostValue> GetAsync(Guid id);
         IEnumerable<CostValue> GetAll();
-        Task Update(CostValue cost);
         PagedResult<CostValue> Search(DateOnly? month, int pageNumber, int pageSize);
         Task<decimal> SumAsync(Guid costId);
     }

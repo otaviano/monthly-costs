@@ -23,17 +23,6 @@ public class CostValueCommandHandlerTests
     }
 
     [Theory, AutoNSubstituteData]
-    public async Task Handle_GivenAValidUpdateCostValueCommand_ShouldReturnsNotNull(
-        [Substitute] CostValueCommandHandler sut,
-        UpdateCostValueCommand request)
-    {
-        var result = await sut.Handle(request, new CancellationToken());
-
-        result.Should().NotBeNull();
-        sut._eventBus.Received(1).Publish(Arg.Any<IEvent>());
-    }
-
-    [Theory, AutoNSubstituteData]
     public async Task Handle_GivenAValidDeleteCostValueCommand_ShouldReturnsNotNull(
       [Substitute] CostValueCommandHandler sut,
       DeleteCostValueCommand request)

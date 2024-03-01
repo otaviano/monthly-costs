@@ -28,14 +28,12 @@ public class CostValueApplication : ICostValueApplication
 
         return _autoMapper.Map<IEnumerable<CostValueResponseViewModel>>(costs);
     }
-
     public async Task<CostValueResponseViewModel> GetAsync(Guid id)
     {
         var cost = await _queryRepository.GetAsync(id);
 
         return _autoMapper.Map<CostValueResponseViewModel>(cost);
     }
-
     public async Task<Guid> CreateAsync(CostValueRequestViewModel model)
     {
         var command = _autoMapper.Map<CreateCostValueCommand>(model)
@@ -44,16 +42,6 @@ public class CostValueApplication : ICostValueApplication
         await _bus.SendCommand(command);
         return command.Id;
     }
-
-    public async Task UpdateAsync(Guid id, CostValueRequestViewModel model)
-    {
-        var command = _autoMapper.Map<UpdateCostValueCommand>(model)
-            ?? throw new ArgumentNullException(nameof(model), $"Error mapping to #{nameof(UpdateCostValueCommand)}");
-        command.Id = id;
-
-        await _bus.SendCommand(command);
-    }
-
     public async Task DeleteAsync(Guid id)
     {
         if(id.Equals(Guid.Empty))
@@ -63,7 +51,6 @@ public class CostValueApplication : ICostValueApplication
 
         await _bus.SendCommand(command);
     }
-
     public async Task<decimal> SumAsync(Guid id)
     {
         return await _queryRepository.SumAsync(id);

@@ -11,7 +11,6 @@ namespace MonthlyCosts.Domain.Services.CommandHandlers;
 
 public class CostValueCommandHandler : CommandHandler, 
     IRequestHandler<CreateCostValueCommand, Unit>,
-    IRequestHandler<UpdateCostValueCommand, Unit>,
     IRequestHandler<DeleteCostValueCommand, Unit>
 {
     protected readonly IMapper _mapper;
@@ -39,18 +38,6 @@ public class CostValueCommandHandler : CommandHandler,
 
         return await Unit.Task;
     }
-
-    public async Task<Unit> Handle(UpdateCostValueCommand request, CancellationToken cancellationToken)
-    {
-        ValidateAndThrow(request);
-        var costValue = _mapper.Map<CostValue>(request);
-        var @event = _mapper.Map<UpdateCostValueEvent>(request);
-        await _costValueRepository.Update(costValue);
-        _eventBus.Publish(@event);
-
-        return await Unit.Task;
-    }
-
     public async Task<Unit> Handle(DeleteCostValueCommand request, CancellationToken cancellationToken)
     {
         ValidateAndThrow(request);
