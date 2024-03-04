@@ -16,7 +16,6 @@ public class DomainToViewModelProfile : Profile
         CreateMap<CostValue, CostValueRequestViewModel>()
             .ForMember(p => p.CostId, q => q.MapFrom(p => p.Cost.Id));
         CreateMap<CostValue, CostValueResponseViewModel>()
-            .ForMember(p => p.CostId, q => q.MapFrom(p => p.Cost.Id))
-            .ForMember(p => p.CostName, q => q.MapFrom(p => p.Cost.Name));
+            .ForMember(p => p.CostId, q => q.MapFrom(p => p.Cost.Id));
     }
 }

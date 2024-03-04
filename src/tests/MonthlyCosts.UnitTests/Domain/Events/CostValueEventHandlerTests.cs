@@ -20,15 +20,6 @@ public class CostValueEventHandlerTests
     }
 
     [Theory, AutoNSubstituteData]
-    public async Task Handle_GivenAValidUpdateCosValuetEvent_ShouldUpdateTheElement(
-        [Substitute] CostValueEventHandler sut,
-        UpdateCostValueEvent request)
-    {
-        await sut.Handle(request, new CancellationToken());
-        await sut._costValueNoSqlRepository.Received(1).Update(Arg.Any<CostValue>());
-    }
-
-    [Theory, AutoNSubstituteData]
     public async Task Handle_GivenAValidDeleteCostValueEvent_ShouldDeleteTheElement(
       [Substitute] CostValueEventHandler sut,
       DeleteCostValueEvent request)

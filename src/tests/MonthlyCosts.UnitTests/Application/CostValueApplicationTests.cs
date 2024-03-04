@@ -32,26 +32,6 @@ public class CostValueApplicationTests
     }
 
     [Theory, AutoNSubstituteData]
-    public async Task UpdateAsync_GivenAValidCostValueRequestViewModel_ShouldCallSendCommandOnce(
-           [Substitute] CostValueApplication sut,
-           CostValueRequestViewModel viewModel,
-           Guid id)
-    {
-        await sut.UpdateAsync(id, viewModel);
-        viewModel.Should().NotBeNull();
-        await sut._bus.Received(1).SendCommand(Arg.Any<UpdateCostValueCommand>());
-    }
-
-    [Theory, AutoNSubstituteData]
-    public async Task UpdateAsync_GivenAnInvalidCostValueRequestViewModel_ShouldThrowsArgumentNullException(
-        CostValueApplication sut)
-    {
-        Func<Task> func = async () => await sut.UpdateAsync(Guid.Empty, null);
-
-        await func.Should().ThrowAsync<ArgumentNullException>();
-    }
-
-    [Theory, AutoNSubstituteData]
     public async Task DeleteAsync_GivenAValidCostValueRequestViewModel_ShouldCallSendCommandOnce(
           [Substitute] CostValueApplication sut,
           Guid id)

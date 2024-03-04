@@ -1,6 +1,4 @@
-﻿using MonthlyCosts.Domain.Entities;
-
-namespace MonthlyCost.Application.ViewModels.v1;
+﻿namespace MonthlyCost.Application.ViewModels.v1;
 
 public class CostResponseViewModel
 {
