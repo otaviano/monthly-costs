@@ -4,7 +4,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src/MonthlyCosts.API
+WORKDIR /src
 COPY ["src/01 - Presentation/MonthlyCosts.API/MonthlyCosts.API.csproj", "MonthlyCosts.API/"]
 RUN dotnet restore "MonthlyCosts.API/MonthlyCosts.API.csproj"
 COPY . .
