@@ -1,4 +1,4 @@
-name: 030-dotnet-workflow
+name: CI - Monthly costs API
 
 on:
   push:
@@ -39,11 +39,3 @@ jobs:
     steps:
       - uses: actions/checkout@v2.1.0
       - run: dotnet test
-      #- name: Publish Test Results
-      #  uses: EnricoMi/publish-unit-test-result-action/composite@v2
-       # if: always()
-        #with:
-         # files: |
-          #  test-results/**/*.xml
-           # test-results/**/*.trx
-            #test-results/**/*.json
