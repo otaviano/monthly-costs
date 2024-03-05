@@ -6,8 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1955304-06DB-4D97-A6D7-BDC607795D70}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		.github\workflows\dotnet-workflow.yml = .github\workflows\dotnet-workflow.yml
-		.github\workflows\main_monthly-costs.yml = .github\workflows\main_monthly-costs.yml
+		.github\workflows\ci-main-workflow.yml = .github\workflows\ci-main-workflow.yml
+		.github\workflows\cd-main-workflow.yml = .github\workflows\cd-main-workflow.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
