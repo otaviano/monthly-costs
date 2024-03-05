@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: monthlycosts.azurecr.io/${{ secrets.DOCKER_USERNAME }}/monthlycostsapi:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./src/01 - Presentation/MonthlyCosts.API/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
