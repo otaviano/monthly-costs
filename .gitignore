@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/01 - Presentation/MonthlyCosts.API/Properties/launchSettings.json

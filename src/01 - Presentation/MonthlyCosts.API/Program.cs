@@ -2,6 +2,10 @@ using MonthlyCosts.API.Filters;
 using MonthlyCosts.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration
+    .AddJsonFile("appsettings.json", false, true)
+    .AddEnvironmentVariables();
+
 var configuration = builder.Configuration;
 
 // Add services to the container.

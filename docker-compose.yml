@@ -37,7 +37,9 @@ services:
     container_name: monthlycosts-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:DbConnection=Server=sql-server-db;Database=monthly_costs_db;User Id=sa;Password=Odb12345678;Encrypt=False"
+      - "ConnectionStrings__DbConnection=$MONTHLY_COST_DBCONNECTION"
+      - "ConnectionStrings__MasterDbConnection=$MONTHLY_COST_MASTERDBCONNECTION"
+
     depends_on:
       - mongo-db
       - sql-server-db
