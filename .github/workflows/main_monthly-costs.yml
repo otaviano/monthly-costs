@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: monthlycosts.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b2b333f68ae24f4cb729c222038ffc9d }}/monthlycostsapi:${{ github.sha }}
+        tags: monthlycosts.azurecr.io/${{ secrets.DOCKER_USERNAME }}/monthlycostsapi:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'monthly-costs'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_53f0eac2f53e4f4fb20b909b468e7d39 }}
-        images: 'monthlycosts.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b2b333f68ae24f4cb729c222038ffc9d }}/monthlycostsapi:${{ github.sha }}'
+        images: 'monthlycosts.azurecr.io/${{ secrets.DOCKER_USERNAME }}/monthlycostsapi:${{ github.sha }}'
