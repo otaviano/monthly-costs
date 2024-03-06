@@ -52,7 +52,7 @@ public static class DataSetupExtension
     {
         using var scope = host.ApplicationServices.CreateScope();
         var migration = scope.ServiceProvider.GetService<IMigrationRunner>();
-        var _dbConnection = DbContext.CreateMasterConnection(configuration);
+        //var _dbConnection = DbContext.CreateMasterConnection(configuration);
 
         try
         {
