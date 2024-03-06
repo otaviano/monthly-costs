@@ -56,7 +56,7 @@ public static class DataSetupExtension
 
         try
         {
-            CreateDataBase(dbName, _dbConnection);
+            //CreateDataBase(dbName, _dbConnection);
             migration.ListMigrations();
             migration.MigrateUp();
         }
