@@ -29,7 +29,7 @@ var app = builder
     .Build();
 
 // Configure the HTTP request pipeline.
-app.ConfigureMigrations(configuration, "monthly_costs_db");
+app.ConfigureMigrations();
 app.ConfigureSwagger(configuration);
 app.ConfigureHealthCheckEndpoints(configuration);
 app.ConfigureRabbitMq();

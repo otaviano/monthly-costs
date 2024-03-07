@@ -1,5 +1,4 @@
-﻿using Dapper;
-using FluentMigrator.Runner;
+﻿using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,34 +47,23 @@ public static class DataSetupExtension
 
         return services;
     }
-    public static IApplicationBuilder ConfigureMigrations(this IApplicationBuilder host, IConfiguration configuration, string dbName)
+    public static IApplicationBuilder ConfigureMigrations(this IApplicationBuilder host)
     {
         using var scope = host.ApplicationServices.CreateScope();
         var migration = scope.ServiceProvider.GetService<IMigrationRunner>();
-        //var _dbConnection = DbContext.CreateMasterConnection(configuration);
 
         try
         {
-            //CreateDataBase(dbName, _dbConnection);
             migration.ListMigrations();
             migration.MigrateUp();
         }
         catch (Exception e)
         {
             migration.Rollback(1);
-            Console.WriteLine($"Error running migrations or create database {dbName} \r\n {e}");
+            Console.WriteLine($"Error running migrations: \r\n {e}");
             throw;
         }
 
         return host;
     }
-    private static void CreateDataBase(string dbName, System.Data.IDbConnection _dbConnection)
-    {
-        var query = "SELECT * FROM sys.databases WHERE name = @name";
-        var parameters = new DynamicParameters();
-        parameters.Add("name", dbName);
-        var dbs = _dbConnection.Query(query, parameters);
-        if (!dbs.Any()) _dbConnection.Execute($"CREATE DATABASE {dbName}");
-    }
-
 }

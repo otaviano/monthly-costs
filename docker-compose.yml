@@ -38,7 +38,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings__DbConnection=$MONTHLY_COST_DBCONNECTION"
-      - "ConnectionStrings__MasterDbConnection=$MONTHLY_COST_MASTERDBCONNECTION"
 
     depends_on:
       - mongo-db

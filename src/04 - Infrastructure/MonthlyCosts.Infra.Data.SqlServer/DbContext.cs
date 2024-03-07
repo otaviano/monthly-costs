@@ -8,7 +8,5 @@ namespace MonthlyCosts.Infra.Data.SqlServer
     {
         public static IDbConnection CreateConnection(IConfiguration configuration)
             => new SqlConnection(configuration.GetConnectionString("DbConnection"));
-        public static IDbConnection CreateMasterConnection(IConfiguration configuration)
-            => new SqlConnection(configuration.GetConnectionString("MasterDbConnection"));
     }
 }
