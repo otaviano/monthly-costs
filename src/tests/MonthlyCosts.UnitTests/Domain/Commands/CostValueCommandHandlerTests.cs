@@ -19,7 +19,7 @@ public class CostValueCommandHandlerTests
         var result = await sut.Handle(request, new CancellationToken());
 
         result.Should().NotBeNull();
-        sut._eventBus.Received(1).Publish(Arg.Any<IEvent>());
+        await sut._eventBus.Received(1).SendMessageAsync(Arg.Any<IEvent>());
     }
 
     [Theory, AutoNSubstituteData]
@@ -30,6 +30,6 @@ public class CostValueCommandHandlerTests
         var result = await sut.Handle(request, new CancellationToken());
 
         result.Should().NotBeNull();
-        sut._eventBus.Received(1).Publish(Arg.Any<IEvent>());
+        await sut._eventBus.Received(1).SendMessageAsync(Arg.Any<IEvent>());
     }
 }

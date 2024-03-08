@@ -2,7 +2,7 @@
 
 namespace MonthlyCosts.Domain.Core.Bus;
 
-public interface IRabbitMQConsumer
+public interface IMessageBusPublisher
 {
-    void Subscribe<T>() where T : IEvent;
+    Task SendMessageAsync(IEvent @event);
 }

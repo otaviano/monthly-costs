@@ -36,8 +36,6 @@ public static class HealthCheckSetupExtensions
     {
         var settings = configuration.GetSection(HealthCheckSettings.SectionName).Get<HealthCheckSettings>()
            ?? throw new NullReferenceException($"Missing #{nameof(HealthCheckSettings)} on the app settings");
-        var eventBusSettings = configuration.GetSection(EventBusSettings.SectionName).Get<EventBusSettings>()
-          ?? throw new NullReferenceException($"Missing #{nameof(EventBusSettings)} on the app settings");
         var mongoDbSettings = configuration.GetSection(MongoDbSettings.SectionName).Get<MongoDbSettings>()
            ?? throw new NullReferenceException($"Missing #{nameof(MongoDbSettings)} on the app settings");
 
@@ -52,7 +50,6 @@ public static class HealthCheckSetupExtensions
             mongodbConnectionString: mongoDbSettings.ConnectionString
                 ?? throw new NullReferenceException($"Missing DbConnection in section #{nameof(MongoDbSettings)} on the app settings"),
             name: "MongoDb"
-          ).AddRabbitMQ(
-            rabbitConnectionString: $"amqps://#{eventBusSettings.EventBusUsername}:#{eventBusSettings.EventBusPassword}@#{eventBusSettings.EventBusHostname}:5672");
+          );
     }
 }

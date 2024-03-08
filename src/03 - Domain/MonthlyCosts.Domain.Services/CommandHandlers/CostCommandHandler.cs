@@ -16,14 +16,15 @@ public class CostCommandHandler : CommandHandler,
 {
     protected readonly IMapper _mapper;
     protected readonly ICostSqlRepository _costRepository;
-    public readonly IRabbitMQEventBus _eventBus;
+    public readonly IMessageBusPublisher _messageBusPublisher;
+
     public CostCommandHandler(
         IMapper mapper,
-        ICostSqlRepository costRepository, 
-        IRabbitMQEventBus eventBus)
+        ICostSqlRepository costRepository,
+        IMessageBusPublisher messageBusPublisher)
     {
         _mapper = mapper;
-        _eventBus = eventBus;
+        _messageBusPublisher = messageBusPublisher;
         _costRepository = costRepository;
     }
     
@@ -34,7 +35,7 @@ public class CostCommandHandler : CommandHandler,
         var cost = _mapper.Map<Cost>(request);
         var @event = _mapper.Map<CreateCostEvent>(request);
         await _costRepository.Create(cost);
-        _eventBus.Publish(@event);
+        await _messageBusPublisher.SendMessageAsync(@event);
 
         return await Unit.Task;
     }
@@ -46,7 +47,7 @@ public class CostCommandHandler : CommandHandler,
         var cost = _mapper.Map<Cost>(request);
         var @event = _mapper.Map<UpdateCostEvent>(request);
         await _costRepository.Update(cost);
-        _eventBus.Publish(@event);
+        await _messageBusPublisher.SendMessageAsync(@event);
 
         return await Unit.Task;
     }
@@ -57,7 +58,7 @@ public class CostCommandHandler : CommandHandler,
 
         await _costRepository.Delete(request.Id);
         var @event = _mapper.Map<DeleteCostEvent>(request);
-        _eventBus.Publish(@event);
+        await _messageBusPublisher.SendMessageAsync(@event);
 
         return await Unit.Task;
     }

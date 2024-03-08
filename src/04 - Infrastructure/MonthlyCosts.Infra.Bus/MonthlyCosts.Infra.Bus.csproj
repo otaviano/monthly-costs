@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.17.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\03 - Domain\MonthlyCosts.Domain.Core\MonthlyCosts.Domain.Core.csproj" />
     <ProjectReference Include="..\..\03 - Domain\MonthlyCosts.Domain.Services\MonthlyCosts.Domain.Services.csproj" />
     <ProjectReference Include="..\..\03 - Domain\MonthlyCosts.Domain\MonthlyCosts.Domain.csproj" />

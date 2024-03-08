@@ -23,7 +23,7 @@ builder.Services.AddRepositories();
 builder.Services.AddSqlConnection(configuration);
 builder.Services.AddNoSqlConnection();
 builder.Services.AddMessageBrokerInMemmory();
-builder.Services.AddRabbitMq(configuration);
+builder.Services.AddMessageBroker(configuration);
 
 var app = builder
     .Build();
@@ -32,7 +32,6 @@ var app = builder
 app.ConfigureMigrations();
 app.ConfigureSwagger(configuration);
 app.ConfigureHealthCheckEndpoints(configuration);
-app.ConfigureRabbitMq();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

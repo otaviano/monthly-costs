@@ -15,11 +15,11 @@ public class CostValueCommandHandler : CommandHandler,
 {
     protected readonly IMapper _mapper;
     protected readonly ICostValueSqlRepository _costValueRepository;
-    public readonly IRabbitMQEventBus _eventBus;
+    public readonly IMessageBusPublisher _eventBus;
 
     public CostValueCommandHandler(
         IMapper mapper,
-        IRabbitMQEventBus eventBus,
+        IMessageBusPublisher eventBus,
         ICostValueSqlRepository costValueRepository)
     {
         _mapper = mapper;
@@ -34,7 +34,7 @@ public class CostValueCommandHandler : CommandHandler,
         var costValue = _mapper.Map<CostValue>(request);
         var @event = _mapper.Map<CreateCostValueEvent>(request);
         await _costValueRepository.Create(costValue);
-        _eventBus.Publish(@event);
+        await _eventBus.SendMessageAsync(@event);
 
         return await Unit.Task;
     }
@@ -43,7 +43,7 @@ public class CostValueCommandHandler : CommandHandler,
         ValidateAndThrow(request);
         await _costValueRepository.Delete(request.Id);
         var @event = _mapper.Map<DeleteCostValueEvent>(request);
-        _eventBus.Publish(@event);
+        await _eventBus.SendMessageAsync(@event);
 
         return await Unit.Task;
     }

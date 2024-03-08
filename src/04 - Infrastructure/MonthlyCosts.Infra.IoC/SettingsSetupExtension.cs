@@ -12,11 +12,11 @@ public static class SettingsSetupExtension
         services.Configure<HealthCheckSettings>(configuration.GetSection(HealthCheckSettings.SectionName));
         services.Configure<MongoDbSettings>(configuration.GetSection(MongoDbSettings.SectionName));
         services.Configure<SwaggerSettings>(configuration.GetSection(SwaggerSettings.SectionName));
-        services.Configure<EventBusSettings>(configuration.GetSection(EventBusSettings.SectionName));
+        services.Configure<MessageBusSettings>(configuration.GetSection(MessageBusSettings.SectionName));
 
         services.AddSingleton(p => p.GetRequiredService<IOptions<HealthCheckSettings>>().Value);
         services.AddSingleton(p => p.GetRequiredService<IOptions<MongoDbSettings>>().Value);
         services.AddSingleton(p => p.GetRequiredService<IOptions<SwaggerSettings>>().Value);
-        services.AddSingleton(p => p.GetRequiredService<IOptions<EventBusSettings>>().Value);
+        services.AddSingleton(p => p.GetRequiredService<IOptions<MessageBusSettings>>().Value);
     }
 }
