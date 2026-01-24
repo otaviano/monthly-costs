@@ -193,20 +193,7 @@ The test project contains helpers using AutoFixture, AutoNSubstitute and AutoMap
 
 ---
 
-## Contributing
-
-Contributions are welcome. If you plan to contribute:
-
-- Open an issue for large changes or proposals
-- Keep changes small and focused per PR
-- Include/update unit tests for new functionality or bug fixes
-- Follow existing folder structure and patterns (Presentation → Application → Domain → Infrastructure)
-
----
-
-## License & contact
-
-- License: none specified in repository. Add a LICENSE file if you want to set an explicit license.
+## Contact
 - Maintainer / author: [otaviano](https://github.com/otaviano)
 
 If you need help or want to discuss architecture, open an issue in the repository.
